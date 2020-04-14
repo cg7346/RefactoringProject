@@ -13,11 +13,11 @@ import bowl.model.Lane;
 import bowl.model.Party;
 import bowl.events.LaneEvent;
 import bowl.model.Bowler;
-import bowl.observers.LaneObserver;
+import bowl.observers.ILaneObserver;
 
 import java.util.*;
 
-public class LaneView implements LaneObserver, ActionListener {
+public class LaneView implements ILaneObserver, ActionListener {
 
 	private int roll;
 	private boolean initDone = true;

@@ -75,7 +75,7 @@ package bowl.model;
 import java.util.*;
 
 import bowl.events.PinsetterEvent;
-import bowl.observers.PinsetterObserver;
+import bowl.observers.IPinsetterObserver;
 
 public class Pinsetter {
 
@@ -104,7 +104,7 @@ public class Pinsetter {
 	 * */
 	private void sendEvent(int jdpins) {	// send events when our state is changd
 		for (int i=0; i < subscribers.size(); i++) {
-			((PinsetterObserver)subscribers.get(i)).receivePinsetterEvent(
+			((IPinsetterObserver)subscribers.get(i)).receivePinsetterEvent(
 				new PinsetterEvent(pins, foul, throwNumber, jdpins));
 		}
 	}
@@ -199,7 +199,7 @@ public class Pinsetter {
 	 * @pre none
 	 * @post the subscriber object will recieve events when their generated
 	 */
-	public void subscribe(PinsetterObserver subscriber) {
+	public void subscribe(IPinsetterObserver subscriber) {
 		subscribers.add(subscriber);
 	}
 

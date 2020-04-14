@@ -20,7 +20,7 @@ package bowl.observers;
 
 import bowl.events.PinsetterEvent;
 
-public interface PinsetterObserver {
+public interface IPinsetterObserver {
 
 	/** recievePinsetterEvent()
 	 * 

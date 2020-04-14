@@ -17,10 +17,10 @@ import bowl.events.PinsetterEvent;
 import bowl.model.Lane;
 import bowl.model.Pinsetter;
 import bowl.model.Bowler;
-import bowl.observers.LaneObserver;
-import bowl.observers.PinsetterObserver;
+import bowl.observers.ILaneObserver;
+import bowl.observers.IPinsetterObserver;
 
-public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver {
+public class LaneStatusView implements ActionListener, ILaneObserver, IPinsetterObserver {
 
 	private JPanel jp;
 

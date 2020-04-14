@@ -24,11 +24,11 @@ import bowl.events.ControlDeskEvent;
 import bowl.model.ControlDesk;
 import bowl.model.Lane;
 import bowl.model.Pinsetter;
-import bowl.observers.ControlDeskObserver;
+import bowl.observers.IControlDeskObserver;
 
 import java.util.*;
 
-public class ControlDeskView implements ActionListener, ControlDeskObserver {
+public class ControlDeskView implements ActionListener, IControlDeskObserver {
 
 	private JButton addParty, finished, assign;
 	private JFrame win;

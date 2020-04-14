@@ -46,7 +46,7 @@ import java.util.*;
 
 import bowl.events.ControlDeskEvent;
 import bowl.io.BowlerFile;
-import bowl.observers.ControlDeskObserver;
+import bowl.observers.IControlDeskObserver;
 
 import java.io.*;
 
@@ -209,7 +209,7 @@ public class ControlDesk extends Thread {
      *
      */
 
-	public void subscribe(ControlDeskObserver adding) {
+	public void subscribe(IControlDeskObserver adding) {
 		subscribers.add(adding);
 	}
 
@@ -224,7 +224,7 @@ public class ControlDesk extends Thread {
 		Iterator eventIterator = subscribers.iterator();
 		while (eventIterator.hasNext()) {
 			(
-				(ControlDeskObserver) eventIterator
+				(IControlDeskObserver) eventIterator
 					.next())
 					.receiveControlDeskEvent(
 				event);

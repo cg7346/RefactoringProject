@@ -2,7 +2,7 @@ package bowl.model;
 
 import java.util.HashMap;
 
-public interface LaneEventInterface extends java.rmi.Remote {
+public interface ILaneEvent extends java.rmi.Remote {
 	public int getFrameNum( ) throws java.rmi.RemoteException;
 	public HashMap getScore( ) throws java.rmi.RemoteException;
 	public int[] getCurScores( ) throws java.rmi.RemoteException;

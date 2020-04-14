@@ -17,7 +17,7 @@ package bowl.observers;
 
 import bowl.events.ControlDeskEvent;
 
-public interface ControlDeskObserver {
+public interface IControlDeskObserver {
 
 	public void receiveControlDeskEvent(ControlDeskEvent ce);
 

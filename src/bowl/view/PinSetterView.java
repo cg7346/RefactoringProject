@@ -19,12 +19,12 @@ import java.awt.*;
 import javax.swing.*;
 
 import bowl.events.PinsetterEvent;
-import bowl.observers.PinsetterObserver;
+import bowl.observers.IPinsetterObserver;
 
 import java.util.Vector;
 
 
-public class PinSetterView implements PinsetterObserver {
+public class PinSetterView implements IPinsetterObserver {
 
 
     private Vector pinVect = new Vector ( );

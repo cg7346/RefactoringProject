@@ -15,7 +15,7 @@ package bowl.observers;
 
 import bowl.events.LaneEvent;
 
-public interface LaneObserver {
+public interface ILaneObserver {
 	public void receiveLaneEvent(LaneEvent le);
 };
 

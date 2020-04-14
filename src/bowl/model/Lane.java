@@ -139,8 +139,8 @@ import bowl.events.LaneEvent;
 import bowl.events.PinsetterEvent;
 import bowl.io.ScoreHistoryFile;
 import bowl.io.ScoreReport;
-import bowl.observers.LaneObserver;
-import bowl.observers.PinsetterObserver;
+import bowl.observers.ILaneObserver;
+import bowl.observers.IPinsetterObserver;
 import bowl.view.EndGamePrompt;
 import bowl.view.EndGameReport;
 
@@ -148,7 +148,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Date;
 
-public class Lane extends Thread implements PinsetterObserver {	
+public class Lane extends Thread implements IPinsetterObserver {	
 	private Party party;
 	private Pinsetter setter;
 	private HashMap scores;
@@ -572,7 +572,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @param subscribe	Observer that is to be added
 	 */
 
-	public void subscribe( LaneObserver adding ) {
+	public void subscribe( ILaneObserver adding ) {
 		subscribers.add( adding );
 	}
 
@@ -583,7 +583,7 @@ public class Lane extends Thread implements PinsetterObserver {
 	 * @param removing	The observer to be removed
 	 */
 	
-	public void unsubscribe( LaneObserver removing ) {
+	public void unsubscribe( ILaneObserver removing ) {
 		subscribers.remove( removing );
 	}
 
@@ -599,7 +599,7 @@ public class Lane extends Thread implements PinsetterObserver {
 			Iterator eventIterator = subscribers.iterator();
 			
 			while ( eventIterator.hasNext() ) {
-				( (LaneObserver) eventIterator.next()).receiveLaneEvent( event );
+				( (ILaneObserver) eventIterator.next()).receiveLaneEvent( event );
 			}
 		}
 	}
