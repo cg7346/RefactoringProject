@@ -33,6 +33,9 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 
+import bowl.io.BowlerFile;
+import bowl.model.Bowler;
+
 import java.util.*;
 import java.text.*;
 

@@ -73,6 +73,10 @@
 package bowl.model;
 
 import java.util.*;
+
+import bowl.events.PinsetterEvent;
+import bowl.observers.PinsetterObserver;
+
 import java.lang.Boolean;
 
 public class Pinsetter {

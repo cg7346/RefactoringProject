@@ -18,6 +18,10 @@ package bowl.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import bowl.events.PinsetterEvent;
+import bowl.observers.PinsetterObserver;
+
 import java.util.Vector;
 
 

@@ -18,6 +18,8 @@
 
 package bowl.observers;
 
+import bowl.events.PinsetterEvent;
+
 public interface PinsetterObserver {
 
 	/** recievePinsetterEvent()

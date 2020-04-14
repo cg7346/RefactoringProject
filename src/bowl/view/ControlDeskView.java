@@ -21,6 +21,12 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 
+import bowl.events.ControlDeskEvent;
+import bowl.model.ControlDesk;
+import bowl.model.Lane;
+import bowl.model.Pinsetter;
+import bowl.observers.ControlDeskObserver;
+
 import java.util.*;
 
 public class ControlDeskView implements ActionListener, ControlDeskObserver {

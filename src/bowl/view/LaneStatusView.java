@@ -14,6 +14,14 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 
+import bowl.events.LaneEvent;
+import bowl.events.PinsetterEvent;
+import bowl.model.Lane;
+import bowl.model.Pinsetter;
+import bowl.model.Bowler;
+import bowl.observers.LaneObserver;
+import bowl.observers.PinsetterObserver;
+
 public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver {
 
 	private JPanel jp;

@@ -9,6 +9,9 @@
 package bowl.io;
 
 import java.util.*;
+
+import bowl.model.Score;
+
 import java.io.*;
 
 public class ScoreHistoryFile {

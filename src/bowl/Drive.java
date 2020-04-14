@@ -1,6 +1,11 @@
 package bowl;
 
 import java.util.Vector;
+
+import bowl.model.Alley;
+import bowl.model.ControlDesk;
+import bowl.view.ControlDeskView;
+
 import java.io.*;
 
 public class Drive {

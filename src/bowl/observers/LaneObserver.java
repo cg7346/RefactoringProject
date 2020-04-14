@@ -13,6 +13,8 @@
 
 package bowl.observers;
 
+import bowl.events.LaneEvent;
+
 public interface LaneObserver {
 	public void receiveLaneEvent(LaneEvent le);
 };

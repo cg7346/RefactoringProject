@@ -8,6 +8,10 @@ package bowl.io;
 
 import java.io.*;
 import java.util.Vector;
+
+import bowl.model.Bowler;
+import bowl.model.Score;
+
 import java.util.Iterator;
 import java.net.*;
 import java.awt.*;

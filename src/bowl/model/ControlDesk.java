@@ -43,15 +43,20 @@
 package bowl.model;
 
 import java.util.*;
+
+import bowl.events.ControlDeskEvent;
+import bowl.io.BowlerFile;
+import bowl.observers.ControlDeskObserver;
+
 import java.io.*;
 
-class ControlDesk extends Thread {
+public class ControlDesk extends Thread {
 
 	/** The collection of Lanes */
 	private HashSet lanes;
 
 	/** The party wait queue */
-	private Queue partyQueue;
+	private bowl.etc.Queue partyQueue;
 
 	/** The number of lanes represented */
 	private int numLanes;
@@ -69,7 +74,7 @@ class ControlDesk extends Thread {
 	public ControlDesk(int numLanes) {
 		this.numLanes = numLanes;
 		lanes = new HashSet(numLanes);
-		partyQueue = new Queue();
+		partyQueue = new bowl.etc.Queue();
 
 		subscribers = new Vector();
 

@@ -8,6 +8,13 @@ package bowl.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import bowl.model.Lane;
+import bowl.model.Party;
+import bowl.events.LaneEvent;
+import bowl.model.Bowler;
+import bowl.observers.LaneObserver;
+
 import java.util.*;
 
 public class LaneView implements LaneObserver, ActionListener {

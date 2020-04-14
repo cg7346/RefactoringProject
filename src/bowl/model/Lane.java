@@ -134,6 +134,16 @@
 package bowl.model;
 
 import java.util.Vector;
+
+import bowl.events.LaneEvent;
+import bowl.events.PinsetterEvent;
+import bowl.io.ScoreHistoryFile;
+import bowl.io.ScoreReport;
+import bowl.observers.LaneObserver;
+import bowl.observers.PinsetterObserver;
+import bowl.view.EndGamePrompt;
+import bowl.view.EndGameReport;
+
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Date;
