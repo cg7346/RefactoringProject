@@ -37,8 +37,6 @@ import bowl.io.BowlerFile;
 import bowl.model.Bowler;
 
 import java.util.*;
-import java.text.*;
-
 /**
  * Constructor for GUI used to Add Parties to the waiting party queue.
  *  

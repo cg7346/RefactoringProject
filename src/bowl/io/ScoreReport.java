@@ -14,7 +14,6 @@ import bowl.model.Score;
 
 import java.util.Iterator;
 import java.net.*;
-import java.awt.*;
 import java.awt.print.*;
 
 public class ScoreReport {
