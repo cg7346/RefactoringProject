@@ -172,6 +172,9 @@ public class Lane extends Thread implements IPinsetterObserver {
 	
 	private Bowler currentThrower;			// = the thrower who just took a throw
 
+
+	private ScoreTracker scoreTracker;
+
 	/** Lane()
 	 * 
 	 * Constructs a new lane and starts its thread
@@ -391,6 +394,8 @@ public class Lane extends Thread implements IPinsetterObserver {
 		resetBowlerIterator();
 		partyAssigned = true;
 
+		scoreTracker = new ScoreTracker(party);
+
 		cumulScores = new int[party.getMembers().size()][10];
 		finalScores = new int[party.getMembers().size()][128]; //Hardcoding a max of 128 games, bite me.
 		gameNumber = 0;
@@ -412,7 +417,8 @@ public class Lane extends Thread implements IPinsetterObserver {
 		int index =  ( frame * 2 + ball);
 
 		curScore = (int[]) scores.get(Cur);
-
+		//scoreTracker.
+		//TODO:  Given a score on a throw, put logic in score tracker to make a FrameScore out of it (track frame number, ball number, canThrowAgain)
 	
 		curScore[ index - 1] = score;
 		scores.put(Cur, curScore);
