@@ -151,7 +151,7 @@ import java.util.Date;
 public class Lane extends Thread implements IPinsetterObserver {	
 	private Party party;
 	private Pinsetter setter;
-	private HashMap scores;
+	private HashMap scores; //A map of Bowler objects to numbers
 	private Vector subscribers;
 
 	private boolean gameIsHalted;
@@ -164,11 +164,10 @@ public class Lane extends Thread implements IPinsetterObserver {
 	private int frameNumber;
 	private boolean tenthFrameStrike;
 
-	private int[] curScores;
-	private int[][] cumulScores;
+	private int[][] cumulScores; //[bowler index][frame] = score
 	private boolean canThrowAgain;
 	
-	private int[][] finalScores;
+	private int[][] finalScores; //[bowler index][game number] = score
 	private int gameNumber;
 	
 	private Bowler currentThrower;			// = the thrower who just took a throw
@@ -304,9 +303,10 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param pe 		The pinsetter event that has been received.
 	 */
 	public void receivePinsetterEvent(PinsetterEvent pe) {
+		System.out.println("Pins down: " + pe.pinsDownOnThisThrow());
 		
 			if (pe.pinsDownOnThisThrow() >=  0) {			// this is a real throw
-				markScore(currentThrower, frameNumber + 1, pe.getThrowNumber(), pe.pinsDownOnThisThrow());
+				markScore(currentThrower, frameNumber, pe.getThrowNumber(), pe.pinsDownOnThisThrow());
 	
 				// next logic handles the ?: what conditions dont allow them another throw?
 				// handle the case of 10th frame first
@@ -390,8 +390,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 		party = theParty;
 		resetBowlerIterator();
 		partyAssigned = true;
-		
-		curScores = new int[party.getMembers().size()];
+
 		cumulScores = new int[party.getMembers().size()][10];
 		finalScores = new int[party.getMembers().size()][128]; //Hardcoding a max of 128 games, bite me.
 		gameNumber = 0;
@@ -410,7 +409,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 */
 	private void markScore( Bowler Cur, int frame, int ball, int score ){
 		int[] curScore;
-		int index =  ( (frame - 1) * 2 + ball);
+		int index =  ( frame * 2 + ball);
 
 		curScore = (int[]) scores.get(Cur);
 
@@ -428,8 +427,21 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @return		The new lane event
 	 */
 	private LaneEvent lanePublish(  ) {
-		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber+1, curScores, ball, gameIsHalted);
+		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber+1, ball, gameIsHalted);
 		return laneEvent;
+	}
+
+	private void printCumulScore() {
+		String output = "";
+
+		for (int row = 0; row < cumulScores.length; row++) {
+			for (int col = 0; col < cumulScores[row].length; col++) {
+				output += "[" + cumulScores[row][col] + "]";
+			}
+			output += "\n";
+		}
+
+		System.out.println(output);
 	}
 
 	/** getScore()
@@ -449,7 +461,11 @@ public class Lane extends Thread implements IPinsetterObserver {
 		for (int i = 0; i != 10; i++){
 			cumulScores[bowlIndex][i] = 0;
 		}
-		int current = 2*(frame - 1)+ball-1;
+		int current = 2*frame+ball-1;
+
+		System.out.println("Current: " + current);
+		System.out.println("Frame number: " + frame);
+		System.out.println("Ball number: " + ball);
 		//Iterate through each ball until the current one.
 		for (int i = 0; i != current+2; i++){
 			//Spare:
@@ -457,10 +473,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 				//This ball was a the second of a spare.  
 				//Also, we're not on the current ball.
 				//Add the next ball to the ith one in cumul.
-				cumulScores[bowlIndex][(i/2)] += curScore[i+1] + curScore[i]; 
-				if (i > 1) {
-					//cumulScores[bowlIndex][i/2] += cumulScores[bowlIndex][i/2 -1];
-				}
+				cumulScores[bowlIndex][(i/2)] += curScore[i+1] + curScore[i];
 			} else if( i < current && i%2 == 0 && curScore[i] == 10  && i < 18){
 				strikeballs = 0;
 				//This ball is the first ball, and was a strike.
@@ -544,6 +557,8 @@ public class Lane extends Thread implements IPinsetterObserver {
 				}
 			}
 		}
+
+		printCumulScore();
 		return totalScore;
 	}
 

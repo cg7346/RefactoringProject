@@ -8,13 +8,13 @@
 
 package bowl.model;
 
-public class Score {
+public class PreviousScore {
 
     private String nick;
     private String date;
     private String score;
 
-    public Score( String nick, String date, String score ) {
+    public PreviousScore(String nick, String date, String score ) {
 		this.nick=nick;
 		this.date=date;
 		this.score=score;
