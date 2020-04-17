@@ -27,12 +27,30 @@ public class GameScore {
         return total;
     }
 
+    public void checkStrikeAndSpare() {
+        FrameScore previousFrame = frameScores.get(frameScores.size() - 2);
+
+        if (previousFrame.hasStrikeOccurred() || previousFrame.hasSpareOccurred()) {
+            previousFrame.addScoreFromNextFrame(getRecentFrameScore());
+        }
+    }
+
+    public int[] getFrameScoreArray() {
+        int[] result = new int[frameScores.size()];
+
+        for (int i = 0; i < frameScores.size(); i++) {
+            result[i] = frameScores.get(i).getScore();
+        }
+
+        return result;
+    }
+
     /**
      * Get the most recent FrameScore object (being used for the
      * current frame).
      * @return The FrameScore instance.
      */
-    public FrameScore getCurrentFrameScore() {
+    public FrameScore getRecentFrameScore() {
         return frameScores.get(frameScores.size() - 1);
     }
 

@@ -75,6 +75,21 @@ public class FrameScore {
         return ballThrows;
     }
 
+    public int[] getBallThrowsAsArray() {
+        int[] result = new int[ballThrows.size()];
+
+//        if (hasStrikeOccurred()) {
+//            result[0] = ballThrows.get(0);
+//            result[1] = -1;
+//        } else {
+//            for (int i = 0; i < 2; i++) {
+//                result[i] = ballThrows.get(i);
+//            }
+//        }
+
+        return result;
+    }
+
     /**
      * Adds to the score of this frame based on the pins downed during
      * the next frame if this one was a strike or a spare. A strike means

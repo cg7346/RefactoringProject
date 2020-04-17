@@ -366,6 +366,8 @@ public class Lane extends Thread implements IPinsetterObserver {
 	private void resetScores() {
 		Iterator bowlIt = (party.getMembers()).iterator();
 
+		//TODO: Change this
+
 		while ( bowlIt.hasNext() ) {
 			int[] toPut = new int[25];
 			for ( int i = 0; i != 25; i++){
@@ -413,16 +415,18 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param score	The bowler's score 
 	 */
 	private void markScore( Bowler Cur, int frame, int ball, int score ){
-		int[] curScore;
-		int index =  ( frame * 2 + ball);
+		scoreTracker.newThrow(Cur, frame, score);
 
-		curScore = (int[]) scores.get(Cur);
-		//scoreTracker.
+
+		//int[] curScore;
+		//int index =  ( frame * 2 + ball);
+
+		//curScore = (int[]) scores.get(Cur);
 		//TODO:  Given a score on a throw, put logic in score tracker to make a FrameScore out of it (track frame number, ball number, canThrowAgain)
 	
-		curScore[ index - 1] = score;
-		scores.put(Cur, curScore);
-		getScore( Cur, frame );
+		//curScore[ index - 1] = score;
+		//scores.put(Cur, curScore);
+		//getScore( Cur, frame );
 		publish( lanePublish() );
 	}
 
@@ -433,7 +437,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @return		The new lane event
 	 */
 	private LaneEvent lanePublish(  ) {
-		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, cumulScores, scores, frameNumber+1, ball, gameIsHalted);
+		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, scoreTracker.getCurrentScoresAsArray(), scores, frameNumber+1, ball, gameIsHalted);
 		return laneEvent;
 	}
 
