@@ -1,38 +1,56 @@
 package bowl.state;
 
 /**
- * @StatePattern: State
- * an interface for Lane Frames to use
+ * @StatePattern: Concrete State
+ * <p>
+ * regular frame lane --> one of the states that a Lane can be in
  */
-public interface ILaneStatus {
+public class RegularFrameLane implements ILaneStatus {
+
+    // TODO: Scoring methods
+
     /**
      * transmits data for the run method and handles requests
      * to change the state for executing a Lane
      */
-    void handleRun();
+    @Override
+    public void handleRun() {
+
+    }
 
     /**
      * transmits data for the assignParty method by assigning
      * members to the specified party
      */
-    void handleAssignParty();
+    @Override
+    public void handleAssignParty() {
+
+    }
 
     /**
      * transmits data for receiving an assigned party and
      * changes the state of the party
      */
-    void handleReceivePartyAssigned();
+    @Override
+    public void handleReceivePartyAssigned() {
+
+    }
 
     /**
      * transmits data for if a game is paused and changes the
      * state
      */
-    void handlePauseGame();
+    @Override
+    public void handlePauseGame() {
+
+    }
 
     /**
      * transmits the data for resuming a game and changes the
      * state
      */
-    void handleUnpauseGame();
+    @Override
+    public void handleUnpauseGame() {
 
+    }
 }
