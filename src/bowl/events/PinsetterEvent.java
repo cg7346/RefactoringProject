@@ -49,9 +49,10 @@ public class PinsetterEvent {
 		return !pinsStillStanding[i];
 	}
 	
-	/** pinsDownOnThisThrow()
-	 * 
-	 * @return the number of pins knocked down assosicated with this event
+	/**
+	 * pinsDownOnThisThrow()
+	 *
+	 * @return the number of pins knocked down associated with this event
 	 */
 	public int pinsDownOnThisThrow() {
 		return pinsDownThisThrow;

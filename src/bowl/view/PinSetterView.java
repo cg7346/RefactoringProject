@@ -8,11 +8,6 @@
  *   $Log$
  */
 
-/**
- *  constructs a prototype PinSetter GUI
- *
- */
-
 package bowl.view;
 
 import bowl.events.PinsetterEvent;
@@ -22,11 +17,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
 
-
+/**
+ * constructs a prototype PinSetter GUI
+ */
 public class PinSetterView implements IPinsetterObserver {
 
 
-	private final Vector pinVect = new Vector();
+	private final Vector<JLabel> pinVect = new Vector<JLabel>();
 	private final JPanel firstRoll;
 	private final JPanel secondRoll;
 
@@ -192,7 +189,7 @@ public class PinSetterView implements IPinsetterObserver {
 			JLabel tempPin = new JLabel();
 			for (int c = 0; c < 10; c++) {
 				boolean pin = pe.pinKnockedDown(c);
-				tempPin = (JLabel) pinVect.get(c);
+				tempPin = pinVect.get(c);
 				if (pin) {
 					tempPin.setForeground(Color.lightGray);
 				}
@@ -203,7 +200,7 @@ public class PinSetterView implements IPinsetterObserver {
 		}
 		if (pe.pinsDownOnThisThrow() == -1) {
 			for (int i = 0; i != 10; i++) {
-				((JLabel) pinVect.get(i)).setForeground(Color.black);
+				(pinVect.get(i)).setForeground(Color.black);
 			}
 			secondRoll.setBackground(Color.black);
 		}

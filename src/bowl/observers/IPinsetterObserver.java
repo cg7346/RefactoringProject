@@ -22,10 +22,11 @@ import bowl.events.PinsetterEvent;
 
 public interface IPinsetterObserver {
 
-	/** recievePinsetterEvent()
-	 * 
-	 * defines the method for an object torecieve a pinsetter event
+	/**
+	 * recievePinsetterEvent()
+	 * <p>
+	 * defines the method for an object to receive a pinsetter event
 	 */
-	public void receivePinsetterEvent(PinsetterEvent pe);
-};
+	void receivePinsetterEvent(PinsetterEvent pe);
+}
 
