@@ -299,13 +299,13 @@ public class Lane extends Thread implements IPinsetterObserver {
     }
 
     /**
-     * recievePinsetterEvent()
+     * receivePinsetterEvent()
      * <p>
-     * recieves the thrown event from the pinsetter
+     * receives the thrown event from the pinsetter
      *
      * @param pe The pinsetter event that has been received.
      * @pre none
-     * @post the event has been acted upon if desiered
+     * @post the event has been acted upon if desired
      */
     public void receivePinsetterEvent(PinsetterEvent pe) {
 
