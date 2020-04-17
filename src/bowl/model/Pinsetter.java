@@ -77,11 +77,11 @@ import java.util.Vector;
  */
 public class Pinsetter {
 
-	private final Random rnd;
-	private final Vector<IPinsetterObserver> subscribers;
+    private final Random rnd;
+    private final Vector<IPinsetterObserver> subscribers;
 
-	private final boolean[] pins;
-	/* 0-9 of state of pine, true for standing,
+    private final boolean[] pins;
+    /* 0-9 of state of pine, true for standing,
     false for knocked down
 
     6   7   8   9
@@ -90,119 +90,124 @@ public class Pinsetter {
           0
 
     */
-	private boolean foul;
-	private int throwNumber;
+    private boolean foul;
+    private int throwNumber;
 
-	/**
-	 * sendEvent()
-	 * <p>
-	 * Sends pinsetter events to all subscribers
-	 *
-	 * @pre none
-	 * @post all subscribers have received pinsetter event with updated state
-	 */
-	private void sendEvent(int jdpins) {    // send events when our state is changed
-		for (Object subscriber : subscribers) {
-			((IPinsetterObserver) subscriber).receivePinsetterEvent(
-					new PinsetterEvent(pins, foul, throwNumber, jdpins));
-		}
-	}
+    /**
+     * Pinsetter()
+     * <p>
+     * Constructs a new pinsetter
+     *
+     * @return Pinsetter object
+     * @pre none
+     * @post a new pinsetter is created
+     */
+    public Pinsetter() {
+        this.pins = new boolean[10];
+        this.rnd = new Random();
+        this.subscribers = new Vector<>();
+        this.foul = false;
+        reset();
+    }
 
-	/** Pinsetter()
-	 *
-	 * Constructs a new pinsetter
-	 *
-	 * @pre none
-	 * @post a new pinsetter is created
-	 * @return Pinsetter object
-	 */
-	public Pinsetter() {
-		this.pins = new boolean[10];
-		this.rnd = new Random();
-		this.subscribers = new Vector<>();
-		this.foul = false;
-		reset();
-	}
+    /**
+     * sendEvent()
+     * <p>
+     * Sends pinsetter events to all subscribers
+     *
+     * @pre none
+     * @post all subscribers have received pinsetter event with updated state
+     */
+    private void sendEvent(int jdpins) {    // send events when our state is changed
+        for (Object subscriber : subscribers) {
+            ((IPinsetterObserver) subscriber).receivePinsetterEvent(
+                    new PinsetterEvent(pins, foul, throwNumber, jdpins));
+        }
+    }
 
-	/** ballThrown()
-	 *
-	 * Called to simulate a ball thrown coming in contact with the pinsetter
-	 *
-	 * @pre none
-	 * @post pins may have been knocked down and the throw number has been incremented
-	 */
-	public void ballThrown() {	// simulated event of ball hits sensor
-		int count = 0;
-		foul = false;
-		double skill = rnd.nextDouble();
-		for (int i=0; i <= 9; i++) {
-			if (pins[i]) {
-				double pinluck = rnd.nextDouble();
-				if (pinluck <= .04) {
-					foul = true;
-				}
-				if (((skill + pinluck) / 2.0 * 1.2) > .5) {
-					pins[i] = false;
-				}
-				if (!pins[i]) {        // this pin just knocked down
-					count++;
-				}
-			}
-		}
+    /**
+     * ballThrown()
+     * <p>
+     * Called to simulate a ball thrown coming in contact with the pinsetter
+     *
+     * @pre none
+     * @post pins may have been knocked down and the throw number has been incremented
+     */
+    public void ballThrown() {    // simulated event of ball hits sensor
+        int count = 0;
+        foul = false;
+        double skill = rnd.nextDouble();
+        for (int i = 0; i <= 9; i++) {
+            if (pins[i]) {
+                double pinluck = rnd.nextDouble();
+                if (pinluck <= .04) {
+                    foul = true;
+                }
+                if (((skill + pinluck) / 2.0 * 1.2) > .5) {
+                    pins[i] = false;
+                }
+                if (!pins[i]) {        // this pin just knocked down
+                    count++;
+                }
+            }
+        }
 
-		try {
-			Thread.sleep(500);                // pinsetter is where delay will be in a real game
-		} catch (Exception ignored) {
-		}
+        try {
+            Thread.sleep(500);                // pinsetter is where delay will be in a real game
+        } catch (Exception ignored) {
+        }
 
-		sendEvent(count);
+        sendEvent(count);
 
-		throwNumber++;
-	}
+        throwNumber++;
+    }
 
-	/** reset()
-	 *
-	 * Reset the pinsetter to its complete state
-	 *
-	 * @pre none
-	 * @post pinsetters state is reset
-	 */
-	public void reset() {
-		this.foul = false;
-		this.throwNumber = 1;
-		resetPins();
+    /**
+     * reset()
+     * <p>
+     * Reset the pinsetter to its complete state
+     *
+     * @pre none
+     * @post pinsetters state is reset
+     */
+    public void reset() {
+        this.foul = false;
+        this.throwNumber = 1;
+        resetPins();
 
-		try {
-			Thread.sleep(1000);
-		} catch (Exception ignored) {
-		}
+        try {
+            Thread.sleep(1000);
+        } catch (Exception ignored) {
+        }
 
-		sendEvent(-1);
-	}
+        sendEvent(-1);
+    }
 
-	/** resetPins()
-	 *
-	 * Reset the pins on the pinsetter
-	 *
-	 * @pre none
-	 * @post pins array is reset to all pins up
-	 */
-	public void resetPins() {
-		for (int i = 0; i <= 9; i++) {
-			this.pins[i] = true;
-		}
-	}
+    /**
+     * resetPins()
+     * <p>
+     * Reset the pins on the pinsetter
+     *
+     * @pre none
+     * @post pins array is reset to all pins up
+     */
+    public void resetPins() {
+        for (int i = 0; i <= 9; i++) {
+            this.pins[i] = true;
+        }
+    }
 
-	/** subscribe()
-	 *
-	 * subscribe objects to send events to
-	 *
-	 * @pre none
-	 * @post the subscriber object will receive events when their generated
-	 */
-	public void subscribe(IPinsetterObserver subscriber) {
-		this.subscribers.add(subscriber);
-	}
+    /**
+     * subscribe()
+     * <p>
+     * subscribe objects to send events to
+     *
+     * @pre none
+     * @post the subscriber object will receive events when their generated
+     */
+    public void subscribe(IPinsetterObserver subscriber) {
+        this.subscribers.add(subscriber);
+    }
 
 }
 

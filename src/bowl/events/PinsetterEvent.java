@@ -16,80 +16,82 @@ package bowl.events;
 
 public class PinsetterEvent {
 
-	private final boolean[] pinsStillStanding;
-	private final boolean foulCommitted;
-	private final int throwNumber;
-	private final int pinsDownThisThrow;
+    private final boolean[] pinsStillStanding;
+    private final boolean foulCommitted;
+    private final int throwNumber;
+    private final int pinsDownThisThrow;
 
-	/**
-	 * PinsetterEvent()
-	 * <p>
-	 * creates a new pinsetter event
-	 *
-	 * @pre none
-	 * @post the object has been initialized
-	 */
-	public PinsetterEvent(boolean[] ps, boolean foul, int tn, int pinsDownThisThrow) {
-		pinsStillStanding = new boolean[10];
+    /**
+     * PinsetterEvent()
+     * <p>
+     * creates a new pinsetter event
+     *
+     * @pre none
+     * @post the object has been initialized
+     */
+    public PinsetterEvent(boolean[] ps, boolean foul, int tn, int pinsDownThisThrow) {
+        pinsStillStanding = new boolean[10];
 
-		System.arraycopy(ps, 0, pinsStillStanding, 0, 10);
+        System.arraycopy(ps, 0, pinsStillStanding, 0, 10);
 
-		foulCommitted = foul;
-		throwNumber = tn;
-		this.pinsDownThisThrow = pinsDownThisThrow;
-	}
+        foulCommitted = foul;
+        throwNumber = tn;
+        this.pinsDownThisThrow = pinsDownThisThrow;
+    }
 
-	/** pinKnockedDown()
-	 * 
-	 * check if a pin has been knocked down
-	 * 
-	 * @return true if pin [i] has been knocked down
-	 */
-	public boolean pinKnockedDown(int i) {
-		return !pinsStillStanding[i];
-	}
-	
-	/**
-	 * pinsDownOnThisThrow()
-	 *
-	 * @return the number of pins knocked down associated with this event
-	 */
-	public int pinsDownOnThisThrow() {
-		return pinsDownThisThrow;
-	}
-	
-	/** totalPinsDown()
-	 * 
-	 * @return the total number of pins down for pinsetter that generated the event
-	 */
-	public int totalPinsDown() {
-		int count = 0;
+    /**
+     * pinKnockedDown()
+     * <p>
+     * check if a pin has been knocked down
+     *
+     * @return true if pin [i] has been knocked down
+     */
+    public boolean pinKnockedDown(int i) {
+        return !pinsStillStanding[i];
+    }
 
-		for (int i = 0; i <= 9; i++) {
-			if (pinKnockedDown(i)) {
-				count++;
-			}
-		}
+    /**
+     * pinsDownOnThisThrow()
+     *
+     * @return the number of pins knocked down associated with this event
+     */
+    public int pinsDownOnThisThrow() {
+        return pinsDownThisThrow;
+    }
 
-		return count;
-	}
+    /**
+     * totalPinsDown()
+     *
+     * @return the total number of pins down for pinsetter that generated the event
+     */
+    public int totalPinsDown() {
+        int count = 0;
 
-	/**
-	 * isFoulCommitted()
-	 *
-	 * @return true if a foul was committed on the lane, false otherwise
-	 */
-	public boolean isFoulCommitted() {
-		return foulCommitted;
-	}
+        for (int i = 0; i <= 9; i++) {
+            if (pinKnockedDown(i)) {
+                count++;
+            }
+        }
 
-	/**
-	 * getThrowNumber()
-	 *
-	 * @return current number of throws taken on this lane after last reset
-	 */
-	public int getThrowNumber() {
-		return throwNumber;
-	}
+        return count;
+    }
+
+    /**
+     * isFoulCommitted()
+     *
+     * @return true if a foul was committed on the lane, false otherwise
+     */
+    public boolean isFoulCommitted() {
+        return foulCommitted;
+    }
+
+    /**
+     * getThrowNumber()
+     *
+     * @return current number of throws taken on this lane after last reset
+     */
+    public int getThrowNumber() {
+        return throwNumber;
+    }
 }
 
