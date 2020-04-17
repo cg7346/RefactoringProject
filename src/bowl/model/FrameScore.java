@@ -2,17 +2,25 @@ package bowl.model;
 
 import java.util.ArrayList;
 
-public class FrameScore implements IScore {
-    //List of the pins knocked down on each throw for the frame
+/**
+ * Represents a bowler's score for a single frame. Each throw
+ * is stored as an individual number of pins knocked down.
+ */
+public class FrameScore {
+    //List of the number of pins knocked down on each throw for the frame
     private ArrayList<Integer> ballThrows;
     //Total amount of pins knocked down this frame
     private int score;
 
     public FrameScore() {
         ballThrows = new ArrayList<>();
+        score = 0;
     }
 
-    @Override
+    /**
+     * Get the total number of pins knocked down this frame.
+     * @return The score for the frame.
+     */
     public int getScore() {
         return score;
     }
@@ -60,8 +68,8 @@ public class FrameScore implements IScore {
     }
 
     /**
-     * Get the array of number of pins knocked down per ball throw
-     * @return
+     * Get the array of number of pins knocked down per ball throw.
+     * @return An arraylist containing each throw for the frame
      */
     public ArrayList<Integer> getBallThrows() {
         return ballThrows;

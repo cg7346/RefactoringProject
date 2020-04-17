@@ -459,6 +459,8 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * 
 	 * @return			The bowlers total score
 	 */
+
+	//TODO: Change this method name to calculateScore??
 	private int getScore( Bowler Cur, int frame) {
 		int[] curScore;
 		int strikeballs = 0;
