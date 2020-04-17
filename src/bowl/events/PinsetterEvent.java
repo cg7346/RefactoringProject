@@ -16,26 +16,25 @@ package bowl.events;
 
 public class PinsetterEvent {
 
-	private boolean[] pinsStillStanding;
-	private boolean foulCommited;
-	private int throwNumber;
-	private int pinsDownThisThrow;
+	private final boolean[] pinsStillStanding;
+	private final boolean foulCommitted;
+	private final int throwNumber;
+	private final int pinsDownThisThrow;
 
-	/** PinsetterEvent()
-	 * 
+	/**
+	 * PinsetterEvent()
+	 * <p>
 	 * creates a new pinsetter event
-	 * 
+	 *
 	 * @pre none
 	 * @post the object has been initialized
 	 */
 	public PinsetterEvent(boolean[] ps, boolean foul, int tn, int pinsDownThisThrow) {
 		pinsStillStanding = new boolean[10];
 
-		for (int i=0; i <= 9; i++) {
-			pinsStillStanding[i] = ps[i];
-		}
-		
-		foulCommited = foul;
+		System.arraycopy(ps, 0, pinsStillStanding, 0, 10);
+
+		foulCommitted = foul;
 		throwNumber = tn;
 		this.pinsDownThisThrow = pinsDownThisThrow;
 	}
@@ -64,30 +63,32 @@ public class PinsetterEvent {
 	 */
 	public int totalPinsDown() {
 		int count = 0;
-		
-		for (int i=0; i <= 9; i++) {
+
+		for (int i = 0; i <= 9; i++) {
 			if (pinKnockedDown(i)) {
 				count++;
 			}
 		}
-		
+
 		return count;
 	}
-	
-	/** isFoulCommited()
-	 * 
-	 * @return true if a foul was commited on the lane, false otherwise
+
+	/**
+	 * isFoulCommitted()
+	 *
+	 * @return true if a foul was committed on the lane, false otherwise
 	 */
-	public boolean isFoulCommited() {
-		return foulCommited;
+	public boolean isFoulCommitted() {
+		return foulCommitted;
 	}
 
-	/** getThrowNumber()
+	/**
+	 * getThrowNumber()
 	 *
 	 * @return current number of throws taken on this lane after last reset
 	 */
 	public int getThrowNumber() {
 		return throwNumber;
 	}
-};
+}
 

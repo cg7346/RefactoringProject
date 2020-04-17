@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ganggang/ganggang.iml" filepath="$PROJECT_DIR$/ganggang/ganggang.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/refactoring-project-gang-gang.iml" filepath="$PROJECT_DIR$/.idea/refactoring-project-gang-gang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/refactoring-project-gang-gang.iml" filepath="$PROJECT_DIR$/refactoring-project-gang-gang.iml" />
     </modules>
   </component>
 </project>
