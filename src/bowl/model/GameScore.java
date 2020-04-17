@@ -28,6 +28,23 @@ public class GameScore {
     }
 
     /**
+     * Get the most recent FrameScore object (being used for the
+     * current frame).
+     * @return The FrameScore instance.
+     */
+    public FrameScore getCurrentFrameScore() {
+        return frameScores.get(frameScores.size() - 1);
+    }
+
+    /**
+     * Get the entire list of current FrameScores for the bowler.
+     * @return An ArrayList with all the FrameScores.
+     */
+    public ArrayList<FrameScore> getAllFrameScores() {
+        return frameScores;
+    }
+
+    /**
      * Add a throw to the current frame score (will always be the most
      * recent one in the list of frameScores).
      * @param pinsDown The number of pins knocked down for the throw.
@@ -37,7 +54,8 @@ public class GameScore {
     }
 
     /**
-     * Create a new frame score object.
+     * Create a new frame score object when the bowler moves
+     * on to the next frame.
      */
     public void newFrame() {
         frameScores.add(new FrameScore());
