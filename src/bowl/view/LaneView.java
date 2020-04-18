@@ -176,14 +176,18 @@ public class LaneView implements ILaneObserver, ActionListener {
 						scoreLabel[k][i].setText(
 							(new Integer(lescores[k][i])).toString());
 				}
+
+
+				//Iterate through array of strings and add to ball label
+				for (int col = 0; col < 21; col++) {
+
+				}
+
+
+
 				for (int i = 0; i < 21; i++) {
-					if (((int[]) ((HashMap) le.getScore())
-						.get(bowlers.get(k)))[i]
-						!= -1)
-						if (((int[]) ((HashMap) le.getScore())
-							.get(bowlers.get(k)))[i]
-							== 10
-							&& (i % 2 == 0 || i == 19))
+					if (((int[]) le.getScore().get(bowlers.get(k)))[i] != -1)
+						if (((int[]) ((HashMap) le.getScore()).get(bowlers.get(k)))[i] == 10 && (i % 2 == 0 || i == 19))
 							ballLabel[k][i].setText("X");
 						else if (
 							i > 0

@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.Vector;
 
 import bowl.model.Bowler;
-import bowl.model.Score;
+import bowl.model.PreviousScore;
 
 import java.util.Iterator;
 import java.net.*;
@@ -45,8 +45,8 @@ public class ScoreReport {
 		content += "\n";
 		content += "Previous scores by date: \n";
 		while (scoreIt.hasNext()){
-			Score score = (Score) scoreIt.next();
-			content += "  " + score.getDate() + " - " +  score.getScore();
+			PreviousScore previousScore = (PreviousScore) scoreIt.next();
+			content += "  " + previousScore.getDate() + " - " +  previousScore.getScore();
 			content += "\n";
 		}
 		content += "\n\n";

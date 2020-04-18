@@ -10,7 +10,7 @@ package bowl.io;
 
 import java.util.*;
 
-import bowl.model.Score;
+import bowl.model.PreviousScore;
 
 import java.io.*;
 
@@ -41,7 +41,7 @@ public class ScoreHistoryFile {
 			String[] scoredata = data.split("\t");
 			//"Nick: scoredata[0] Date: scoredata[1] Score: scoredata[2]
 			if (nick.equals(scoredata[0])) {
-				scores.add(new Score(scoredata[0], scoredata[1], scoredata[2]));
+				scores.add(new PreviousScore(scoredata[0], scoredata[1], scoredata[2]));
 			}
 		}
 		return scores;
