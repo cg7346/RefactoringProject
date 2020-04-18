@@ -729,4 +729,5 @@ public class Lane extends Thread implements IPinsetterObserver {
 //    public void incrementFrame(){
 //        frameNumber = frameNumber < 9 ? frameNumber++ : frameNumber;
 //    }
+
 }

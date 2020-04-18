@@ -95,7 +95,7 @@ public class FinalFrameLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
-
+        lane.changeStatus(new PausedLane(lane, this));
     }
 
     /**
@@ -104,7 +104,7 @@ public class FinalFrameLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
-
+        //pass through
     }
 
     private void insertFinalScore(int bowlIndex) {

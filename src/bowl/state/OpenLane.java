@@ -54,7 +54,7 @@ public class OpenLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
-
+        //pass through
     }
 
     /**
@@ -63,6 +63,6 @@ public class OpenLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
-
+        //pass through
     }
 }

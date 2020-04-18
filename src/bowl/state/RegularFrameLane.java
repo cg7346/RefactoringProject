@@ -78,7 +78,7 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
-        lane.changeStatus(new PausedLane(lane));
+        lane.changeStatus(new PausedLane(lane, this));
     }
 
     /**

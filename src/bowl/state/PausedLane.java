@@ -3,6 +3,8 @@ package bowl.state;
 import bowl.events.PinsetterEvent;
 import bowl.model.Lane;
 
+import java.io.InputStreamReader;
+
 /**
  * @StatePattern: Concrete State
  * <p>
@@ -12,9 +14,11 @@ import bowl.model.Lane;
 public class PausedLane implements ILaneStatus {
 
     private Lane lane;
+    private ILaneStatus previousStatus;
 
-    public PausedLane(Lane lane){
+    public PausedLane(Lane lane, ILaneStatus previousStatus){
         this.lane = lane;
+        this.previousStatus = previousStatus;
     }
     /**
      * transmits data for the run method and handles requests
@@ -22,7 +26,7 @@ public class PausedLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
-
+        //we can put in another wait block or just leave it
     }
 
     /**
@@ -50,7 +54,7 @@ public class PausedLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
-
+        //pass through
     }
 
     /**
@@ -59,6 +63,6 @@ public class PausedLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
-
+        lane.changeStatus(previousStatus);
     }
 }
