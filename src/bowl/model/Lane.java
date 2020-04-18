@@ -139,6 +139,7 @@ import bowl.io.ScoreHistoryFile;
 import bowl.io.ScoreReport;
 import bowl.observers.ILaneObserver;
 import bowl.observers.IPinsetterObserver;
+import bowl.state.ILaneStatus;
 import bowl.view.EndGamePrompt;
 import bowl.view.EndGameReport;
 
@@ -171,6 +172,8 @@ public class Lane extends Thread implements IPinsetterObserver {
     private int gameNumber;
 
     private Bowler currentThrower;            // = the thrower who just took a throw
+
+    ILaneStatus status;
 
     /**
      * Lane()
@@ -640,4 +643,17 @@ public class Lane extends Thread implements IPinsetterObserver {
         publish(lanePublish());
     }
 
+    /**
+     * used to change the status of the game to another state
+     * Regular Frame Lane
+     * Open Lane
+     * Final Frame Lane
+     * Paused Game
+     * Finished Game
+     *
+     * @param stat games current status
+     */
+    void changeStatus(ILaneStatus stat) {
+        status = stat;
+    }
 }
