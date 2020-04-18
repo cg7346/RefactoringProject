@@ -168,34 +168,37 @@ public class Lane extends Thread implements IPinsetterObserver {
     private boolean tenthFrameStrike;
 
 	private int[][] cumulScores; //[bowler index][frame] = score
-	private boolean canThrowAgain;
+    private boolean canThrowAgain;
 
-	private int[][] finalScores; //[bowler index][game number] = score
-	private int gameNumber;
-	
-	private Bowler currentThrower;			// = the thrower who just took a throw
+    private int[][] finalScores; //[bowler index][game number] = score
+    private int gameNumber;
 
-	//Keeps track of scoring for all players during the game
-	private ScoreTracker scoreTracker;
+    private Bowler currentThrower;            // = the thrower who just took a throw
+
+    //Keeps track of scoring for all players during the game
+    private ScoreTracker scoreTracker;
     ILaneStatus status;
-	/** Lane()
-	 * 
-	 * Constructs a new lane and starts its thread
-	 * 
-	 * @pre none
-	 * @post a new lane has been created and its thered is executing
-	 */
-	public Lane() { 
-		setter = new Pinsetter();
-		scores = new HashMap();
-		subscribers = new Vector();
 
-        gameIsHalted = false;
-        partyAssigned = false;
+    /**
+     * Lane()
+     * <p>
+     * Constructs a new lane and starts its thread
+     *
+     * @pre none
+     * @post a new lane has been created and its thered is executing
+     */
+    public Lane() {
+        this.status = new OpenLane(this);
+        this.setter = new Pinsetter();
+        this.scores = new HashMap();
+        this.subscribers = new Vector();
 
-        gameNumber = 0;
+        this.gameIsHalted = false;
+        this.partyAssigned = false;
 
-        setter.subscribe(this);
+        this.gameNumber = 0;
+
+        this.setter.subscribe(this);
 
         this.start();
     }
@@ -404,37 +407,38 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param theParty		Party to be assigned
 	 */
 	public void assignParty( Party theParty ) {
-		party = theParty;
-		resetBowlerIterator();
-		partyAssigned = true;
+        party = theParty;
+        resetBowlerIterator();
+        partyAssigned = true;
 
-		scoreTracker = new ScoreTracker(party);
+        scoreTracker = new ScoreTracker(party);
 
-		cumulScores = new int[party.getMembers().size()][10];
-		finalScores = new int[party.getMembers().size()][128]; //Hardcoding a max of 128 games, bite me.
-		gameNumber = 0;
-		
-		resetScores();
-	}
+        cumulScores = new int[party.getMembers().size()][10];
+        finalScores = new int[party.getMembers().size()][128]; //Hardcoding a max of 128 games, bite me.
+        gameNumber = 0;
 
-	/** markScore()
-	 *
-	 * Method that marks a bowlers score on the board.
-	 * 
-	 * @param Cur		The current bowler
-	 * @param frame	The frame that bowler is on
-	 * //@param ball		The ball the bowler is on
-	 * @param score	The bowler's score 
-	 */
-	//TODO: clean up the this.currentThrow, this.frame number
-	public void markScore(Bowler Cur, int frame, int score ){
-		scoreTracker.newThrow(Cur, frame, score);
+        resetScores();
+    }
+
+    /**
+     * markScore()
+     * <p>
+     * Method that marks a bowlers score on the board.
+     *
+     * @param Cur   The current bowler
+     * @param frame The frame that bowler is on
+     *              //@param ball		The ball the bowler is on
+     * @param score The bowler's score
+     */
+    //TODO: clean up the this.currentThrow, this.frame number
+    public void markScore(Bowler Cur, int frame, int score) {
+        scoreTracker.newThrow(Cur, frame, score);
 
 
-		//int[] curScore;
-		//int index =  ( frame * 2 + ball);
+        //int[] curScore;
+        //int index =  ( frame * 2 + ball);
 
-		//curScore = (int[]) scores.get(Cur);
+        //curScore = (int[]) scores.get(Cur);
 		//TODO: Get ball throws for lane event (array of strings)
 		//curScore[ index - 1] = score;
 		//scores.put(Cur, curScore);
