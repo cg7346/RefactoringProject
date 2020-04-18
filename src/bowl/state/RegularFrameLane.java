@@ -85,6 +85,7 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
+        System.out.println("GOING TO PAUSED---------");
         lane.publish(lane.lanePublish(true));
         lane.changeStatus(new PausedLane(lane, this));
     }

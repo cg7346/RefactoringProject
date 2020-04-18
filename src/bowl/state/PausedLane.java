@@ -2,6 +2,8 @@ package bowl.state;
 
 import bowl.events.PinsetterEvent;
 
+import java.sql.SQLOutput;
+
 /**
  * @StatePattern: Concrete State
  * <p>
@@ -22,6 +24,7 @@ public class PausedLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
+        System.out.println("PausedGame");
         //we can put in another wait block or just leave it
     }
 
@@ -51,6 +54,7 @@ public class PausedLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
+        System.out.println("UNPAUSE GAME");
         lane.publish(lane.lanePublish(false));
         lane.changeStatus(previousStatus);
     }

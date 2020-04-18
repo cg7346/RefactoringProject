@@ -562,8 +562,8 @@ public class Lane extends Thread implements IPinsetterObserver {
      * Resume the execution of this game
      */
     public void unPauseGame() {
-        gameIsHalted = false;
-        status.handlePauseGame();
+        //gameIsHalted = false;
+        status.handleUnpauseGame();
     }
 
     /**
