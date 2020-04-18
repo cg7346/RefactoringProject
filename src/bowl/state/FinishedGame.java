@@ -19,8 +19,7 @@ public class FinishedGame implements ILaneStatus {
     }
 
     /**
-     * transmits data for the run method and handles requests
-     * to change the state for executing a Lane
+     * Handles the end game report and then transitions to open lane
      */
     @Override
     public void handleRun() {

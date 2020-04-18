@@ -60,8 +60,8 @@ public class RegularFrameLane implements ILaneStatus {
 
     /**
      * Handles the Pinsetter Event sent when a ball is thrown
-     * It will mark the score
-     * @param event
+     * It will mark the score then check if the bowler's turn is done
+     * @param event the PinsetterEvent sent when a ball is thrown
      */
     @Override
     public void handlePinsetterEvent(PinsetterEvent event) {
@@ -70,16 +70,16 @@ public class RegularFrameLane implements ILaneStatus {
 
         System.out.println("Pins down: " + pinsDown);
         lane.markScore(currentBowler, frameNumber, pinsDown);
-        if (pinsDown >= 0){
-            if (pinsDown == 10 || throwNumber == 2){
-                lane.disableThrow();
-            }
+
+        // if all the pins were knocked down or this is their second ball
+        // they cannot throw again
+        if (pinsDown == 10 || throwNumber == 2){
+            lane.disableThrow();
         }
     }
 
     /**
-     * transmits data for if a game is paused and changes the
-     * state
+     * Transitions into the PausedLane state
      */
     @Override
     public void handlePauseGame() {
@@ -87,8 +87,7 @@ public class RegularFrameLane implements ILaneStatus {
     }
 
     /**
-     * transmits the data for resuming a game and changes the
-     * state
+     * Cannot unpause an ongoing game, so just pass through
      */
     @Override
     public void handleUnpauseGame() {

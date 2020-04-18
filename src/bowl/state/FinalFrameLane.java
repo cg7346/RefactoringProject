@@ -29,8 +29,7 @@ public class FinalFrameLane implements ILaneStatus {
     // TODO: Scoring Methods
 
     /**
-     * transmits data for the run method and handles requests
-     * to change the state for executing a Lane
+     * Lets the bowler
      */
     @Override
     public void handleRun() {
@@ -88,8 +87,7 @@ public class FinalFrameLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for if a game is paused and changes the
-     * state
+     * Transitions into the PausedLane state
      */
     @Override
     public void handlePauseGame() {
@@ -97,8 +95,7 @@ public class FinalFrameLane implements ILaneStatus {
     }
 
     /**
-     * transmits the data for resuming a game and changes the
-     * state
+     * Cannot unpause an ongoing game, so just pass through
      */
     @Override
     public void handleUnpauseGame() {

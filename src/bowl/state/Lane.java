@@ -315,10 +315,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param pe 		The pinsetter event that has been received.
 	 */
 	public void receivePinsetterEvent(PinsetterEvent pe) {
-	    if (pe.pinsDownOnThisThrow() >= 0) {
-	        
-            status.handlePinsetterEvent(pe);
-        }
+	    status.handlePinsetterEvent(pe);
 //		//TODO: Remove this
 //		System.out.println("Pins down: " + pe.pinsDownOnThisThrow());
 //
