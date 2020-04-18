@@ -662,5 +662,4 @@ public class Lane extends Thread implements IPinsetterObserver {
         return party;
     }
 
-
 }
