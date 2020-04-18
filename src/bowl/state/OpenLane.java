@@ -24,6 +24,8 @@ public class OpenLane implements ILaneStatus {
     @Override
     public void handleRun() {
         if (lane.isPartyAssigned()){
+            lane.resetScores();
+            lane.resetBowlerIterator();
             lane.changeStatus(new RegularFrameLane(lane));
         }
     }
