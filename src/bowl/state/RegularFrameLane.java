@@ -34,7 +34,7 @@ public class RegularFrameLane implements ILaneStatus {
     @Override
     public void handleRun() {
         if (bowlerIterator.hasNext()){
-            //TODO: Can we remove this casting?
+            //TODO: Can we remove this casting? I don't think so
             currentBowler = (Bowler) bowlerIterator.next();
             canThrowAgain = true;
             //tenthFameStrike = false;
