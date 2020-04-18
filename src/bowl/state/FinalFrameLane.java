@@ -17,7 +17,6 @@ public class FinalFrameLane implements ILaneStatus {
     private final Iterator bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
-    private Boolean tenthFameStrike;
     private int ballNumber;
     private int bowlIndex;
 
@@ -38,7 +37,7 @@ public class FinalFrameLane implements ILaneStatus {
             //TODO: Can we remove this casting?
             currentBowler = (Bowler) bowlerIterator.next();
             canThrowAgain = true;
-            tenthFameStrike = false;
+            lane.setTenthFrameStrike(false);
             while (canThrowAgain){
                 lane.throwBall();
             }
@@ -73,7 +72,7 @@ public class FinalFrameLane implements ILaneStatus {
         if (totalPins == 10){
             lane.resetPins();
             if (throwNumber == 1){
-                lane.enableTenthFrameStrike();
+                lane.setTenthFrameStrike(true);
             }
         }
         else{

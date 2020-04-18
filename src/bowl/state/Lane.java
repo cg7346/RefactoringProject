@@ -688,8 +688,7 @@ public class Lane extends Thread implements IPinsetterObserver {
      *
      * @param stat games current status
      */
-    //TODO: Package private
-    public void changeStatus(ILaneStatus stat) {
+    void changeStatus(ILaneStatus stat) {
         status = stat;
     }
 
@@ -697,39 +696,52 @@ public class Lane extends Thread implements IPinsetterObserver {
      * Used to turn off throwing for the current bowler
      * Used by either the Regular Frame Lane or Final Frame Lane
      */
-    //TODO: Somehow make this not a public method, maybe throw lane in
-    // the same package as its states
-    public void disableThrow(){
+    void disableThrow(){
         canThrowAgain = false;
     }
 
     /**
      * Used by the pinsetterEvent handler to reset the setter after
-     * the 10th frame strike
+     * the 10th frame strike and each normal throw
      */
-    //TODO: Same as above
-    public void resetPins(){
+    void resetPins(){
         setter.resetPins();
     }
-    //TODO: Same as above
-    public boolean isTenthFrameStrike(){
+
+    /**
+     * Checks to see if a Tenth Frame Strike has
+     * happened
+     * @return true if it has happened, false if not
+     */
+    boolean isTenthFrameStrike(){
         return tenthFrameStrike;
     }
-    //TODO: Same as above
-    public void enableTenthFrameStrike(){
-        tenthFrameStrike = true;
+
+    /**
+     * Lets the Final Frame State either turn on
+     * or off the TenthFrameStrike
+     * @param choice either true if strike has happened,
+     *               or false if not
+     */
+    void setTenthFrameStrike(boolean choice){
+        tenthFrameStrike = choice;
     }
 
-    public void throwBall(){
+    /**
+     * Called by the state to make a PinsetterEvent
+     * happen
+     */
+    void throwBall(){
         setter.ballThrown();
     }
 
-    public Iterator<Bowler> getBowlerIterator(){
+    /**
+     * Allows the state to iterate over the bowlers
+     * @return An Iterator for Bowlers
+     */
+    Iterator<Bowler> getBowlerIterator(){
         return bowlerIterator;
     }
 
-//    public void incrementFrame(){
-//        frameNumber = frameNumber < 9 ? frameNumber++ : frameNumber;
-//    }
 
 }
