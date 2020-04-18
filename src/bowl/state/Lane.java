@@ -670,4 +670,14 @@ public class Lane extends Thread implements IPinsetterObserver {
         return party;
     }
 
+    void insertFinalScore(int bowlIndex, Bowler bowler){
+    finalScores[bowlIndex][gameNumber] = cumulScores[bowlIndex][9];
+        try {
+            Date date = new Date();
+            String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
+            ScoreHistoryFile.addScore(bowler.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
+        } catch (Exception e) {
+             System.err.println("Exception in addScore. " + e);
+        }
+    }
 }

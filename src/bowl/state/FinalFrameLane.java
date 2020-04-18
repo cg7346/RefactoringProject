@@ -44,8 +44,9 @@ public class FinalFrameLane implements ILaneStatus {
                 ballNumber++;
             }
             lane.resetSetter();
+            lane.insertFinalScore(bowlIndex, currentBowler);
             bowlIndex++;
-            //send scores out
+
         }
         //transition to game finished
         lane.changeStatus(new FinishedGame(lane, lane.getParty()));
@@ -95,18 +96,5 @@ public class FinalFrameLane implements ILaneStatus {
         lane.publish(lane.lanePublish(true));
     }
 
-    private void insertFinalScore(int bowlIndex) {
-        //we need to make a method in the lane class that does this
-        //and call it here, the lane should know the game number already
-//        if (frameNumber == 9) {
-//            finalScores[bowlIndex][gameNumber] = cumulScores[bowlIndex][9];
-//            try {
-//                Date date = new Date();
-//                String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
-//                ScoreHistoryFile.addScore(currentThrower.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
-//            } catch (Exception e) {
-//                System.err.println("Exception in addScore. " + e);
-//            }
-//        }
-    }
 }
+
