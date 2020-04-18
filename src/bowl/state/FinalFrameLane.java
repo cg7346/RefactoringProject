@@ -1,11 +1,8 @@
 package bowl.state;
 
 import bowl.events.PinsetterEvent;
-import bowl.io.ScoreHistoryFile;
 import bowl.model.Bowler;
-import bowl.model.Lane;
 
-import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -16,15 +13,15 @@ import java.util.Iterator;
  */
 public class FinalFrameLane implements ILaneStatus {
 
-    private Lane lane;
-    private Iterator bowlerIterator;
+    private final Lane lane;
+    private final Iterator bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
     private Boolean tenthFameStrike;
     private int ballNumber;
     private int bowlIndex;
 
-    public FinalFrameLane(Lane lane){
+    public FinalFrameLane(Lane lane) {
         this.lane = lane;
         bowlerIterator = lane.getBowlerIterator();
     }

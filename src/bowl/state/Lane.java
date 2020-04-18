@@ -131,28 +131,31 @@
  *
  */
 
-package bowl.model;
+package bowl.state;
 
 import bowl.events.LaneEvent;
 import bowl.events.PinsetterEvent;
 import bowl.io.ScoreHistoryFile;
 import bowl.io.ScoreReport;
+import bowl.model.Bowler;
+import bowl.model.Party;
+import bowl.model.Pinsetter;
+import bowl.model.ScoreTracker;
 import bowl.observers.ILaneObserver;
 import bowl.observers.IPinsetterObserver;
-import bowl.state.ILaneStatus;
 import bowl.view.EndGamePrompt;
 import bowl.view.EndGameReport;
 
-import java.util.Iterator;
-import java.util.HashMap;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Vector;
 
-public class Lane extends Thread implements IPinsetterObserver {	
-	private Party party;
-	private Pinsetter setter;
-	private HashMap scores; //A map of Bowler objects to numbers
-	private Vector subscribers;
+public class Lane extends Thread implements IPinsetterObserver {
+    private Party party;
+    private final Pinsetter setter;
+    private final HashMap scores; //A map of Bowler objects to numbers
+    private final Vector subscribers;
 
     private boolean gameIsHalted;
 

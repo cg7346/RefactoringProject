@@ -5,17 +5,20 @@
 
 package bowl.view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
-import bowl.model.Lane;
-import bowl.model.Party;
 import bowl.events.LaneEvent;
 import bowl.model.Bowler;
+import bowl.model.Party;
 import bowl.observers.ILaneObserver;
+import bowl.state.Lane;
 
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Iterator;
+import java.util.Vector;
 
 public class LaneView implements ILaneObserver, ActionListener {
 
@@ -187,26 +190,26 @@ public class LaneView implements ILaneObserver, ActionListener {
 
 				for (int i = 0; i < 21; i++) {
 					if (((int[]) le.getScore().get(bowlers.get(k)))[i] != -1)
-						if (((int[]) ((HashMap) le.getScore()).get(bowlers.get(k)))[i] == 10 && (i % 2 == 0 || i == 19))
+						if (((int[]) le.getScore().get(bowlers.get(k)))[i] == 10 && (i % 2 == 0 || i == 19))
 							ballLabel[k][i].setText("X");
 						else if (
-							i > 0
-								&& ((int[]) ((HashMap) le.getScore())
-									.get(bowlers.get(k)))[i]
-									+ ((int[]) ((HashMap) le.getScore())
+								i > 0
+										&& ((int[]) le.getScore()
+										.get(bowlers.get(k)))[i]
+										+ ((int[]) le.getScore()
 										.get(bowlers.get(k)))[i
-									- 1]
-									== 10
-								&& i % 2 == 1)
+										- 1]
+										== 10
+										&& i % 2 == 1)
 							ballLabel[k][i].setText("/");
-						else if ( ((int[])((HashMap) le.getScore()).get(bowlers.get(k)))[i] == -2 ){
-							
+						else if (((int[]) le.getScore().get(bowlers.get(k)))[i] == -2) {
+
 							ballLabel[k][i].setText("F");
 						} else
 							ballLabel[k][i].setText(
-								(new Integer(((int[]) ((HashMap) le.getScore())
-									.get(bowlers.get(k)))[i]))
-									.toString());
+									(new Integer(((int[]) le.getScore()
+											.get(bowlers.get(k)))[i]))
+											.toString());
 				}
 			}
 

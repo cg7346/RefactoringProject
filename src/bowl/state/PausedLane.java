@@ -1,9 +1,6 @@
 package bowl.state;
 
 import bowl.events.PinsetterEvent;
-import bowl.model.Lane;
-
-import java.io.InputStreamReader;
 
 /**
  * @StatePattern: Concrete State
@@ -13,7 +10,7 @@ import java.io.InputStreamReader;
  */
 public class PausedLane implements ILaneStatus {
 
-    private Lane lane;
+    private final Lane lane;
     private ILaneStatus previousStatus;
 
     public PausedLane(Lane lane, ILaneStatus previousStatus){
