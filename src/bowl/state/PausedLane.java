@@ -1,7 +1,6 @@
 package bowl.state;
 
 import bowl.events.PinsetterEvent;
-import bowl.model.Lane;
 
 /**
  * @StatePattern: Concrete State
@@ -11,7 +10,7 @@ import bowl.model.Lane;
  */
 public class PausedLane implements ILaneStatus {
 
-    private Lane lane;
+    private final Lane lane;
 
     public PausedLane(Lane lane){
         this.lane = lane;

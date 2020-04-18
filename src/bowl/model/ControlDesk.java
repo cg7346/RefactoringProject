@@ -42,27 +42,36 @@
 
 package bowl.model;
 
-import java.util.*;
-
 import bowl.events.ControlDeskEvent;
 import bowl.io.BowlerFile;
 import bowl.observers.IControlDeskObserver;
+import bowl.state.Lane;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Vector;
 
 public class ControlDesk extends Thread {
 
-	/** The collection of Lanes */
-	private HashSet lanes;
+	/**
+	 * The collection of Lanes
+	 */
+	private final HashSet lanes;
 
-	/** The party wait queue */
-	private bowl.etc.Queue partyQueue;
+	/**
+	 * The party wait queue
+	 */
+	private final bowl.etc.Queue partyQueue;
 
-	/** The number of lanes represented */
-	private int numLanes;
-	
+	/**
+	 * The number of lanes represented
+	 */
+	private final int numLanes;
+
 	/** The collection of subscribers */
-	private Vector subscribers;
+	private final Vector subscribers;
 
     /**
      * Constructor for the ControlDesk class
@@ -177,15 +186,15 @@ public class ControlDesk extends Thread {
 	 *
      * @return a Vecotr of Strings
      *
-     */
+	 */
 
 	public Vector getPartyQueue() {
 		Vector displayPartyQueue = new Vector();
-		for ( int i=0; i < ( (Vector)partyQueue.asVector()).size(); i++ ) {
+		for (int i = 0; i < partyQueue.asVector().size(); i++) {
 			String nextParty =
-				((Bowler) ((Vector) ((Party) partyQueue.asVector().get( i ) ).getMembers())
-					.get(0))
-					.getNickName() + "'s Party";
+					((Bowler) ((Party) partyQueue.asVector().get(i)).getMembers()
+							.get(0))
+							.getNickName() + "'s Party";
 			displayPartyQueue.addElement(nextParty);
 		}
 		return displayPartyQueue;

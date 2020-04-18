@@ -8,35 +8,38 @@
 
 package bowl.view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
 import bowl.events.LaneEvent;
 import bowl.events.PinsetterEvent;
-import bowl.model.Lane;
 import bowl.model.Pinsetter;
-import bowl.model.Bowler;
 import bowl.observers.ILaneObserver;
 import bowl.observers.IPinsetterObserver;
+import bowl.state.Lane;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LaneStatusView implements ActionListener, ILaneObserver, IPinsetterObserver {
 
-	private JPanel jp;
+	private final JPanel jp;
 
-	private JLabel curBowler, foul, pinsDown;
-	private JButton viewLane;
-	private JButton viewPinSetter, maintenance;
+	private final JLabel curBowler;
+	private final JLabel foul;
+	private final JLabel pinsDown;
+	private final JButton viewLane;
+	private final JButton viewPinSetter;
+	private final JButton maintenance;
 
-	private PinSetterView psv;
-	private LaneView lv;
-	private Lane lane;
+	private final PinSetterView psv;
+	private final LaneView lv;
+	private final Lane lane;
 	int laneNum;
 
 	boolean laneShowing;
 	boolean psShowing;
 
-	public LaneStatusView(Lane lane, int laneNum ) {
+	public LaneStatusView(Lane lane, int laneNum) {
 
 		this.lane = lane;
 		this.laneNum = laneNum;
@@ -141,16 +144,16 @@ public class LaneStatusView implements ActionListener, ILaneObserver, IPinsetter
 	}
 
 	public void receiveLaneEvent(LaneEvent le) {
-		curBowler.setText( ( (Bowler)le.getBowler()).getNickName() );
-		if ( le.isMechanicalProblem() ) {
-			maintenance.setBackground( Color.RED );
-		}	
-		if ( lane.isPartyAssigned() == false ) {
-			viewLane.setEnabled( false );
-			viewPinSetter.setEnabled( false );
+		curBowler.setText(le.getBowler().getNickName());
+		if (le.isMechanicalProblem()) {
+			maintenance.setBackground(Color.RED);
+		}
+		if (lane.isPartyAssigned() == false) {
+			viewLane.setEnabled(false);
+			viewPinSetter.setEnabled(false);
 		} else {
-			viewLane.setEnabled( true );
-			viewPinSetter.setEnabled( true );
+			viewLane.setEnabled(true);
+			viewPinSetter.setEnabled(true);
 		}
 	}
 

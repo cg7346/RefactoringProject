@@ -2,7 +2,6 @@ package bowl.state;
 
 import bowl.events.PinsetterEvent;
 import bowl.model.Bowler;
-import bowl.model.Lane;
 
 import java.util.Iterator;
 
@@ -14,14 +13,14 @@ import java.util.Iterator;
 public class RegularFrameLane implements ILaneStatus {
 
     // TODO: Scoring methods
-    private Lane lane;
-    private Iterator bowlerIterator;
+    private final Lane lane;
+    private final Iterator bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
     //private Boolean tenthFameStrike;
     private int ballNumber;
 
-    public RegularFrameLane(Lane lane){
+    public RegularFrameLane(Lane lane) {
         this.lane = lane;
         this.bowlerIterator = lane.getBowlerIterator();
     }
