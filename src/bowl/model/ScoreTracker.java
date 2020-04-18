@@ -1,23 +1,25 @@
 package bowl.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ScoreTracker {
     private HashMap<Bowler, GameScore> currentScores;
+    private Lane lane;
     private int ballNumber;
     private int frameNumber;
 
-    public ScoreTracker(Party party) {
+    public ScoreTracker(Party party, Lane lane) {
         currentScores = new HashMap<>();
+        this.lane = lane;
 
         //Object type cast preserves original Vector implementation of Party
         for (Object bowler : party.getMembers()) {
             currentScores.put((Bowler) bowler, new GameScore());
         }
+        makeNewFrames();
 
-        frameNumber = -1;
-
-        //System.out.println(currentScores.keySet());
+        frameNumber = 0;
     }
 
     public HashMap<Bowler, GameScore> getCurrentScores() {
@@ -33,12 +35,14 @@ public class ScoreTracker {
             row++;
         }
 
+        System.out.println(Arrays.deepToString(result));
+
         return result;
     }
 
-    private void makeNewFrames(int eventFrame) {
+    private void makeNewFrames() {
         for (GameScore gameScore : currentScores.values()) {
-            if (eventFrame >= 2) {
+            if (frameNumber != 0) {
                 gameScore.checkStrikeAndSpare();
             }
 
@@ -48,9 +52,11 @@ public class ScoreTracker {
 
     public void newThrow(Bowler bowler, int eventFrame, int pinsDown) {
         if (eventFrame != this.frameNumber) {
-            makeNewFrames(eventFrame);
+            this.frameNumber = eventFrame;
+            makeNewFrames();
         }
 
         currentScores.get(bowler).newThrow(pinsDown);
+        //lane.scoreMarked();
     }
 }

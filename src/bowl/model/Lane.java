@@ -165,6 +165,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 	private boolean tenthFrameStrike;
 
 	private int[][] cumulScores; //[bowler index][frame] = score
+	private boolean scoreMarked;
 	private boolean canThrowAgain;
 	
 	private int[][] finalScores; //[bowler index][game number] = score
@@ -189,6 +190,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 
 		gameIsHalted = false;
 		partyAssigned = false;
+		scoreMarked = false;
 
 		gameNumber = 0;
 
@@ -223,6 +225,15 @@ public class Lane extends Thread implements IPinsetterObserver {
 					while (canThrowAgain) {
 						setter.ballThrown();		// simulate the thrower's ball hiting
 						ball++;
+//						while (!scoreMarked) {
+//							try {
+//								this.wait();
+//							} catch (InterruptedException e) {
+//								//
+//							}
+//						}
+//
+//						scoreMarked = false;
 					}
 					
 					if (frameNumber == 9){
@@ -295,6 +306,10 @@ public class Lane extends Thread implements IPinsetterObserver {
 			} catch (Exception e) {}
 		}
 	}
+
+//	public void scoreMarked() {
+//		scoreMarked = true;
+//	}
 	
 	/** recievePinsetterEvent()
 	 * 
@@ -396,7 +411,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 		resetBowlerIterator();
 		partyAssigned = true;
 
-		scoreTracker = new ScoreTracker(party);
+		scoreTracker = new ScoreTracker(party, this);
 
 		cumulScores = new int[party.getMembers().size()][10];
 		finalScores = new int[party.getMembers().size()][128]; //Hardcoding a max of 128 games, bite me.
@@ -422,8 +437,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 		//int index =  ( frame * 2 + ball);
 
 		//curScore = (int[]) scores.get(Cur);
-		//TODO:  Given a score on a throw, put logic in score tracker to make a FrameScore out of it (track frame number, ball number, canThrowAgain)
-	
+		//TODO: Get ball throws for lane event (array of strings)
 		//curScore[ index - 1] = score;
 		//scores.put(Cur, curScore);
 		//getScore( Cur, frame );
