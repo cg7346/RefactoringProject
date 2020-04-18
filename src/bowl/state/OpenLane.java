@@ -29,15 +29,6 @@ public class OpenLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
-
-    }
-
-    /**
      * Pass through because we cannot handle events that
      * should not be happening
      * @param event the PinsetterEvent we will not be handling

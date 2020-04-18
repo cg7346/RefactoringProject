@@ -75,15 +75,6 @@ public class FinishedGame implements ILaneStatus {
     }
 
     /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
-
-    }
-
-    /**
      * Pass through because we cannot handle events when the
      * the game is over and we should not be getting events anyways
      * @param event the event we will not be handling

@@ -50,15 +50,6 @@ public class FinalFrameLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
-
-    }
-
-    /**
      * transmits data for receiving an assigned party and
      * changes the state of the party
      * @param event
