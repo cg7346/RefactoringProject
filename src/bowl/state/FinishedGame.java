@@ -43,6 +43,7 @@ public class FinishedGame implements ILaneStatus {
         if (result == 1) {                    // yes, want to play again
             lane.resetScores();
             lane.resetBowlerIterator();
+            lane.changeStatus(new RegularFrameLane(lane));
 
         } else if (result == 2) {// no, dont want to play another game
             Vector printVector;
