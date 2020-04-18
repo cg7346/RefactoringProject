@@ -11,16 +11,13 @@ public class FrameScore {
     private ArrayList<Integer> ballThrows;
     //Total amount of pins knocked down this frame
     private int score;
-    //The frame number in the bowling game
-    private int frameNumber;
     //The count of how many throws to add to the score (for strike/spare)
-    private int throwsToAdd;
+    private int throwsToAddCount;
 
-    public FrameScore(int frameNumber) {
+    public FrameScore() {
         ballThrows = new ArrayList<>();
         score = 0;
-        this.frameNumber = frameNumber;
-        throwsToAdd = 0;
+        throwsToAddCount = 0;
     }
 
     /**
@@ -44,12 +41,13 @@ public class FrameScore {
     /**
      * A strike has occurred for the frame if all 10 pins were knocked
      * down in one throw. This also means that the scores of the next
-     * two throws get added on to this frame. This method excludes the 10th frame.
+     * two throws get added on to this frame.
+     * This method is not used on the 10th frame.
      * @return True if there was a strike, false otherwise.
      */
     public boolean hasStrikeOccurred() {
         if (ballThrows.get(0) == 10) {
-            throwsToAdd = 2;
+            throwsToAddCount = 2;
             return true;
         }
 
@@ -58,67 +56,76 @@ public class FrameScore {
 
     /**
      * A spare has occurred for the frame if all 10 pins were knocked
-     * down in two throws. This also means that the scores of the next
-     * throw gets added on to this frame. This method excludes the 10th frame.
+     * down in two throws, and if a strike has not occurred. This also
+     * means that the scores of the next 1 throw gets added on to this frame.
+     * This method is not used on the 10th frame.
      * @return True if there was a strike, false otherwise.
      */
     public boolean hasSpareOccurred() {
-        int totalDown = 0;
-
-        for (Integer pinsDown : ballThrows) {
-            totalDown += pinsDown;
+        if (hasStrikeOccurred()) {
+            return false;
         }
 
-        if (totalDown >= 10) {
-            throwsToAdd = 1;
+        if (totalPinsDown() >= 10) {
+            throwsToAddCount = 1;
             return true;
         }
 
         return false;
     }
 
-    public void addNewThrow(int pinsDown) {
-        if (throwsToAdd != 0) { //TODO: Remove conditional
-            score += pinsDown;
-            throwsToAdd--;
-        }else {
-            //throw new RuntimeException("Fuck");
-        }
+    /**
+     * Add on to the score for this frame and decrement the amount of
+     * future throw scores to be added to the frame. This method is only
+     * used when this frame was a strike or spare.
+     * @param pinsDown The amount of pins down for the throw.
+     */
+    public void addNewThrowScore(int pinsDown) {
+        score += pinsDown;
+        throwsToAddCount--;
     }
-
-    public int getThrowsToAdd() {
-        return throwsToAdd;
-    }
-
-    public int getFrameNumber() {
-        return frameNumber;
-    }
-
-//    /**
-//     * Get the total number of pins knocked down for the frame
-//     * @return The total number of pins downed
-//     */
-//    public int totalPinsDown() {
-//        int total = 0;
-//
-//        for (int pinsDown : ballThrows) {
-//            total += pinsDown;
-//        }
-//
-//        return total;
-//    }
 
     /**
-     * Get the array of number of pins knocked down per ball throw.
-     * @return An arraylist containing each throw for the frame
+     * Get the amount of throw scores to be added to this frame.
+     * @return The amount of throws to add.
+     */
+    public int getThrowsToAddCount() {
+        return throwsToAddCount;
+    }
+
+    /**
+     * Get the total number of pins knocked down for the frame.
+     * @return The total number of pins downed.
+     */
+    public int totalPinsDown() {
+        int total = 0;
+
+        for (int pinsDown : ballThrows) {
+            total += pinsDown;
+        }
+
+        return total;
+    }
+
+    /**
+     * Get the list of number of pins knocked down per ball throw.
+     * @return An arraylist containing each throw for the frame.
      */
     public ArrayList<Integer> getBallThrows() {
         return ballThrows;
     }
 
+    /**
+     * Convert the throws for this frame into string form. The array
+     * will be of size 2, or 3 for frame 10. Any empty spaces (where
+     * a throw was not made) will be filled with an empty string. Strikes
+     * are marked with an "X" and spares are marked with a "/".
+     * @return An array of Strings.
+     */
     public String[] getBallThrowsAsArray() {
         String[] result = new String[ballThrows.size()];
 
+        /* Work in progress */
 
 
 //        if (hasStrikeOccurred()) {
@@ -132,22 +139,4 @@ public class FrameScore {
 
         return result;
     }
-
-//    /**
-//     * Adds to the score of this frame based on the pins downed during
-//     * the next frame if this one was a strike or a spare. A strike means
-//     * the total amount of pins knocked down on the next frame gets added
-//     * to this frame's score. A spare means the number of pins knocked down
-//     * on the first throw of the next frame gets added to this frame's score.
-//     * @param nextFrame The FrameScore of the frame after this one.
-//     */
-//    public void addScoreFromNextFrame(FrameScore nextFrame) {
-//        if (this.hasStrikeOccurred()) {
-//            score += nextFrame.totalPinsDown();
-//        }
-//
-//        if (this.hasSpareOccurred()) {
-//            score += nextFrame.getBallThrows().get(0);
-//        }
-//    }
 }
