@@ -46,7 +46,7 @@ public class FinalFrameLane implements ILaneStatus {
             //send scores out
         }
         //transition to game finished
-        lane.changeStatus(new FinishedGame(lane));
+        lane.changeStatus(new FinishedGame(lane, lane.getParty()));
     }
 
     /**
