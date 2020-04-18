@@ -43,7 +43,7 @@ public class FinalFrameLane implements ILaneStatus {
                 lane.throwBall();
                 ballNumber++;
             }
-            lane.resetPins();
+            lane.resetSetter();
             bowlIndex++;
             //send scores out
         }
@@ -71,10 +71,10 @@ public class FinalFrameLane implements ILaneStatus {
         }
         else{
             if (throwNumber == 2 && !lane.isTenthFrameStrike()){
-                lane.disableThrow();
+                canThrowAgain= false;
             }
             if (throwNumber == 3){
-                lane.disableThrow();
+                canThrowAgain = false;
             }
         }
     }
