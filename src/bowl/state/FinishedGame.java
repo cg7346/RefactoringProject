@@ -40,7 +40,6 @@ public class FinishedGame implements ILaneStatus {
 
         System.out.println("result was: " + result);
 
-        // TODO: send record of scores to control desk
         if (result == 1) {                    // yes, want to play again
             lane.resetScores();
             lane.resetBowlerIterator();

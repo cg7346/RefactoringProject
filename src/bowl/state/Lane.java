@@ -739,27 +739,44 @@ public class Lane extends Thread implements IPinsetterObserver {
 
     /**
      * Allows the state to iterate over the bowlers
+     *
      * @return An Iterator for Bowlers
      */
-    Iterator<Bowler> getBowlerIterator(){
+    Iterator<Bowler> getBowlerIterator() {
         return bowlerIterator;
     }
 
+    /**
+     * Lets the Finished Game frame to set the assigned party to generate end GameReport
+     *
+     * @param assigned true or false if the game has been assigned
+     */
     void setAssignedParty(boolean assigned) {
         this.partyAssigned = assigned;
     }
 
+    /**
+     * Allows the Finished Game frame to gather the final scores for the GameReport
+     *
+     * @return the final scores at the end of the game
+     */
     int[][] getFinalScores() {
         return this.finalScores;
     }
 
+    /**
+     * Allows the Finished Game frame to get the game number for the Score Report
+     *
+     * @return the current games' number
+     */
     int getGameNumber() {
         return gameNumber;
     }
-//    public void incrementFrame(){
+
+    //    public void incrementFrame(){
 //        frameNumber = frameNumber < 9 ? frameNumber++ : frameNumber;
 //  }
-    Party getParty(){
+    Party getParty() {
         return party;
     }
 
