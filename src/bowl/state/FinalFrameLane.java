@@ -1,7 +1,12 @@
 package bowl.state;
 
 import bowl.events.PinsetterEvent;
+import bowl.io.ScoreHistoryFile;
+import bowl.model.Bowler;
 import bowl.model.Lane;
+
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  * @StatePattern: Concrete State
@@ -12,9 +17,16 @@ import bowl.model.Lane;
 public class FinalFrameLane implements ILaneStatus {
 
     private Lane lane;
+    private Iterator bowlerIterator;
+    private Bowler currentBowler;
+    private Boolean canThrowAgain;
+    private Boolean tenthFameStrike;
+    private int ballNumber;
+    private int bowlIndex;
 
     public FinalFrameLane(Lane lane){
         this.lane = lane;
+        bowlerIterator = lane.getBowlerIterator();
     }
 
     // TODO: Scoring Methods
@@ -25,7 +37,21 @@ public class FinalFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
-
+        int bowlerIndex = 0;
+        if (bowlerIterator.hasNext()){
+            //TODO: Can we remove this casting?
+            currentBowler = (Bowler) bowlerIterator.next();
+            canThrowAgain = true;
+            tenthFameStrike = false;
+            while (canThrowAgain){
+                lane.throwBall();
+            }
+            lane.resetPins();
+            bowlerIndex++;
+            //send scores out
+        }
+        //transition to game finished
+        lane.changeStatus(new FinishedGame(lane));
     }
 
     /**
@@ -79,5 +105,20 @@ public class FinalFrameLane implements ILaneStatus {
     @Override
     public void handleUnpauseGame() {
 
+    }
+
+    private void insertFinalScore(int bowlIndex) {
+        //we need to make a method in the lane class that does this
+        //and call it here, the lane should know the game number already
+//        if (frameNumber == 9) {
+//            finalScores[bowlIndex][gameNumber] = cumulScores[bowlIndex][9];
+//            try {
+//                Date date = new Date();
+//                String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
+//                ScoreHistoryFile.addScore(currentThrower.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
+//            } catch (Exception e) {
+//                System.err.println("Exception in addScore. " + e);
+//            }
+//        }
     }
 }

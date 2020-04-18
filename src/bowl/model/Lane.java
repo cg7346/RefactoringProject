@@ -204,10 +204,13 @@ public class Lane extends Thread implements IPinsetterObserver {
      */
     public void run() {
 
+        //this will turn into
+        // status.handleRun()
+        //try sleep ......
+
         while (true) {
             if (partyAssigned && !gameFinished) {    // we have a party on this lane,
                 // so next bower can take a throw
-
                 while (gameIsHalted) {
                     try {
                         sleep(10);
@@ -683,7 +686,8 @@ public class Lane extends Thread implements IPinsetterObserver {
      *
      * @param stat games current status
      */
-    void changeStatus(ILaneStatus stat) {
+    //TODO: Package private
+    public void changeStatus(ILaneStatus stat) {
         status = stat;
     }
 
@@ -713,4 +717,16 @@ public class Lane extends Thread implements IPinsetterObserver {
     public void enableTenthFrameStrike(){
         tenthFrameStrike = true;
     }
+
+    public void throwBall(){
+        setter.ballThrown();
+    }
+
+    public Iterator<Bowler> getBowlerIterator(){
+        return bowlerIterator;
+    }
+
+//    public void incrementFrame(){
+//        frameNumber = frameNumber < 9 ? frameNumber++ : frameNumber;
+//    }
 }

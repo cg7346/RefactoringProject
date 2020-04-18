@@ -1,7 +1,10 @@
 package bowl.state;
 
 import bowl.events.PinsetterEvent;
+import bowl.model.Bowler;
 import bowl.model.Lane;
+
+import java.util.Iterator;
 
 /**
  * @StatePattern: Concrete State
@@ -12,9 +15,15 @@ public class RegularFrameLane implements ILaneStatus {
 
     // TODO: Scoring methods
     private Lane lane;
+    private Iterator bowlerIterator;
+    private Bowler currentBowler;
+    private Boolean canThrowAgain;
+    //private Boolean tenthFameStrike;
+    private int ballNumber;
 
     public RegularFrameLane(Lane lane){
         this.lane = lane;
+        this.bowlerIterator = lane.getBowlerIterator();
     }
 
     /**
@@ -23,7 +32,16 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
-
+        if (bowlerIterator.hasNext()){
+            //TODO: Can we remove this casting?
+            currentBowler = (Bowler) bowlerIterator.next();
+            canThrowAgain = true;
+            //tenthFameStrike = false;
+            while (canThrowAgain){
+                lane.throwBall();
+            }
+            lane.resetPins();
+        }
     }
 
     /**
@@ -60,7 +78,7 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
-
+        lane.changeStatus(new PausedLane(lane));
     }
 
     /**
@@ -69,6 +87,6 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
-
+        // pass through
     }
 }
