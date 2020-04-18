@@ -1,5 +1,8 @@
 package bowl.state;
 
+import bowl.events.PinsetterEvent;
+import bowl.model.Lane;
+
 /**
  * @StatePattern: Concrete State
  * <p>
@@ -8,7 +11,13 @@ package bowl.state;
  */
 public class FinishedGame implements ILaneStatus {
 
+    private Lane lane;
+
     // TODO: end game methods
+
+    public FinishedGame(Lane lane){
+        this.lane = lane;
+    }
 
     /**
      * transmits data for the run method and handles requests
@@ -31,10 +40,11 @@ public class FinishedGame implements ILaneStatus {
     /**
      * transmits data for receiving an assigned party and
      * changes the state of the party
+     * @param event
      */
     @Override
-    public void handleReceivePartyAssigned() {
-
+    public void handlePinsetterEvent(PinsetterEvent event) {
+        //pass through
     }
 
     /**

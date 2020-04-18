@@ -309,44 +309,48 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param pe 		The pinsetter event that has been received.
 	 */
 	public void receivePinsetterEvent(PinsetterEvent pe) {
-		//TODO: Remove this
-		System.out.println("Pins down: " + pe.pinsDownOnThisThrow());
-
-			if (pe.pinsDownOnThisThrow() >=  0) {			// this is a real throw
-				markScore(currentThrower, frameNumber, pe.getThrowNumber(), pe.pinsDownOnThisThrow());
-	
-				// next logic handles the ?: what conditions dont allow them another throw?
-				// handle the case of 10th frame first
-				if (frameNumber == 9) {
-					if (pe.totalPinsDown() == 10) {
-						setter.resetPins();
-						if(pe.getThrowNumber() == 1) {
-							tenthFrameStrike = true;
-						}
-					}
-				
-					if ((pe.totalPinsDown() != 10) && (pe.getThrowNumber() == 2 && tenthFrameStrike == false)) {
-						canThrowAgain = false;
-						//publish( lanePublish() );
-					}
-				
-					if (pe.getThrowNumber() == 3) {
-						canThrowAgain = false;
-						//publish( lanePublish() );
-					}
-				} else { // its not the 10th frame
-			
-					if (pe.pinsDownOnThisThrow() == 10) {		// threw a strike
-						canThrowAgain = false;
-						//publish( lanePublish() );
-					} else if (pe.getThrowNumber() == 2) {
-						canThrowAgain = false;
-						//publish( lanePublish() );
-					} else if (pe.getThrowNumber() == 3)  
-						System.out.println("I'm here...");
-				}
-			} else {								//  this is not a real throw, probably a reset
-			}
+	    if (pe.pinsDownOnThisThrow() >= 0) {
+	        markScore(pe.pinsDownOnThisThrow());
+            status.handlePinsetterEvent(pe);
+        }
+//		//TODO: Remove this
+//		System.out.println("Pins down: " + pe.pinsDownOnThisThrow());
+//
+//			if (pe.pinsDownOnThisThrow() >=  0) {			// this is a real throw
+//				markScore(currentThrower, frameNumber, pe.getThrowNumber(), pe.pinsDownOnThisThrow());
+//
+//				// next logic handles the ?: what conditions dont allow them another throw?
+//				// handle the case of 10th frame first
+//				if (frameNumber == 9) {
+//					if (pe.totalPinsDown() == 10) {
+//						setter.resetPins();
+//						if(pe.getThrowNumber() == 1) {
+//							tenthFrameStrike = true;
+//						}
+//					}
+//
+//					if ((pe.totalPinsDown() != 10) && (pe.getThrowNumber() == 2 && tenthFrameStrike == false)) {
+//						canThrowAgain = false;
+//						//publish( lanePublish() );
+//					}
+//
+//					if (pe.getThrowNumber() == 3) {
+//						canThrowAgain = false;
+//						//publish( lanePublish() );
+//					}
+//				} else { // its not the 10th frame
+//
+//					if (pe.pinsDownOnThisThrow() == 10) {		// threw a strike
+//						canThrowAgain = false;
+//						//publish( lanePublish() );
+//					} else if (pe.getThrowNumber() == 2) {
+//						canThrowAgain = false;
+//						//publish( lanePublish() );
+//					} else if (pe.getThrowNumber() == 3)
+//						System.out.println("I'm here...");
+//				}
+//			} else {								//  this is not a real throw, probably a reset
+//			}
 	}
 	
 	/** resetBowlerIterator()
@@ -419,7 +423,10 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param ball		The ball the bowler is on
 	 * @param score	The bowler's score 
 	 */
-	private void markScore( Bowler Cur, int frame, int ball, int score ){
+	//TODO: clean up the this.currentThrow, this.frame number
+	public void markScore(int score ){
+	    Bowler Cur = this.currentThrower;
+	    int frame = this.frameNumber;
 		scoreTracker.newThrow(Cur, frame, score);
 
 
@@ -678,5 +685,32 @@ public class Lane extends Thread implements IPinsetterObserver {
      */
     void changeStatus(ILaneStatus stat) {
         status = stat;
+    }
+
+    /**
+     * Used to turn off throwing for the current bowler
+     * Used by either the Regular Frame Lane or Final Frame Lane
+     */
+    //TODO: Somehow make this not a public method, maybe throw lane in
+    // the same package as its states
+    public void disableThrow(){
+        canThrowAgain = false;
+    }
+
+    /**
+     * Used by the pinsetterEvent handler to reset the setter after
+     * the 10th frame strike
+     */
+    //TODO: Same as above
+    public void resetPins(){
+        setter.resetPins();
+    }
+    //TODO: Same as above
+    public boolean isTenthFrameStrike(){
+        return tenthFrameStrike;
+    }
+    //TODO: Same as above
+    public void enableTenthFrameStrike(){
+        tenthFrameStrike = true;
     }
 }

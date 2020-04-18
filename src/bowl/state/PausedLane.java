@@ -1,5 +1,8 @@
 package bowl.state;
 
+import bowl.events.PinsetterEvent;
+import bowl.model.Lane;
+
 /**
  * @StatePattern: Concrete State
  * <p>
@@ -7,6 +10,12 @@ package bowl.state;
  * be in
  */
 public class PausedLane implements ILaneStatus {
+
+    private Lane lane;
+
+    public PausedLane(Lane lane){
+        this.lane = lane;
+    }
     /**
      * transmits data for the run method and handles requests
      * to change the state for executing a Lane
@@ -28,10 +37,11 @@ public class PausedLane implements ILaneStatus {
     /**
      * transmits data for receiving an assigned party and
      * changes the state of the party
+     * @param event
      */
     @Override
-    public void handleReceivePartyAssigned() {
-
+    public void handlePinsetterEvent(PinsetterEvent event) {
+        //pass through
     }
 
     /**

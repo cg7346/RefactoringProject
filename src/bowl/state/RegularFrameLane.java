@@ -1,5 +1,8 @@
 package bowl.state;
 
+import bowl.events.PinsetterEvent;
+import bowl.model.Lane;
+
 /**
  * @StatePattern: Concrete State
  * <p>
@@ -8,6 +11,11 @@ package bowl.state;
 public class RegularFrameLane implements ILaneStatus {
 
     // TODO: Scoring methods
+    private Lane lane;
+
+    public RegularFrameLane(Lane lane){
+        this.lane = lane;
+    }
 
     /**
      * transmits data for the run method and handles requests
@@ -30,10 +38,20 @@ public class RegularFrameLane implements ILaneStatus {
     /**
      * transmits data for receiving an assigned party and
      * changes the state of the party
+     * @param event
      */
     @Override
-    public void handleReceivePartyAssigned() {
+    public void handlePinsetterEvent(PinsetterEvent event) {
+        int pinsDown = event.pinsDownOnThisThrow();
+        int throwNumber = event.getThrowNumber();
 
+        System.out.println("Pins down: " + pinsDown);
+        lane.markScore(pinsDown);
+        if (pinsDown >= 0){
+            if (pinsDown == 10 || throwNumber == 2){
+                lane.disableThrow();
+            }
+        }
     }
 
     /**
