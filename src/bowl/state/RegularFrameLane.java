@@ -52,15 +52,6 @@ public class RegularFrameLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
-
-    }
-
-    /**
      * Handles the Pinsetter Event sent when a ball is thrown
      * It will mark the score then check if the bowler's turn is done
      * @param event the PinsetterEvent sent when a ball is thrown

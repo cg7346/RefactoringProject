@@ -11,7 +11,7 @@ import bowl.events.PinsetterEvent;
 public class PausedLane implements ILaneStatus {
 
     private final Lane lane;
-    private ILaneStatus previousStatus;
+    private final ILaneStatus previousStatus;
 
     public PausedLane(Lane lane, ILaneStatus previousStatus){
         this.lane = lane;
@@ -23,15 +23,6 @@ public class PausedLane implements ILaneStatus {
     @Override
     public void handleRun() {
         //we can put in another wait block or just leave it
-    }
-
-    /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
-
     }
 
     /**

@@ -40,10 +40,10 @@ public class FinishedGame implements ILaneStatus {
 
         System.out.println("result was: " + result);
 
-        // TODO: send record of scores to control desk
         if (result == 1) {                    // yes, want to play again
             lane.resetScores();
             lane.resetBowlerIterator();
+            lane.changeStatus(new RegularFrameLane(lane));
 
         } else if (result == 2) {// no, dont want to play another game
             Vector printVector;
@@ -71,15 +71,6 @@ public class FinishedGame implements ILaneStatus {
 
             }
         }
-
-    }
-
-    /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
 
     }
 

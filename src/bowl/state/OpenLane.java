@@ -24,17 +24,10 @@ public class OpenLane implements ILaneStatus {
     @Override
     public void handleRun() {
         if (lane.isPartyAssigned()){
+            lane.resetScores();
+            lane.resetBowlerIterator();
             lane.changeStatus(new RegularFrameLane(lane));
         }
-    }
-
-    /**
-     * transmits data for the assignParty method by assigning
-     * members to the specified party
-     */
-    @Override
-    public void handleAssignParty() {
-
     }
 
     /**
