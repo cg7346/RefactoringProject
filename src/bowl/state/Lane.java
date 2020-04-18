@@ -359,16 +359,17 @@ public class Lane extends Thread implements IPinsetterObserver {
 //			}
 	}
 	
-	/** resetBowlerIterator()
-	 * 
-	 * sets the current bower iterator back to the first bowler
-	 * 
-	 * @pre the party as been assigned
-	 * @post the iterator points to the first bowler in the party
-	 */
-	private void resetBowlerIterator() {
-		bowlerIterator = (party.getMembers()).iterator();
-	}
+	/**
+     * resetBowlerIterator()
+     * <p>
+     * sets the current bower iterator back to the first bowler
+     *
+     * @pre the party as been assigned
+     * @post the iterator points to the first bowler in the party
+     */
+    void resetBowlerIterator() {
+        bowlerIterator = (party.getMembers()).iterator();
+    }
 
     /**
      * resetScores()
@@ -378,17 +379,17 @@ public class Lane extends Thread implements IPinsetterObserver {
      * @pre the party has been assigned
      * @post scoring system is initialized
      */
-    private void resetScores() {
+    void resetScores() {
         Iterator bowlIt = (party.getMembers()).iterator();
 
-		//TODO: Change this
+        //TODO: Change this
 
-		while ( bowlIt.hasNext() ) {
-			int[] toPut = new int[25];
-			for ( int i = 0; i != 25; i++){
-				toPut[i] = -1;
-			}
-			scores.put( bowlIt.next(), toPut );
+        while (bowlIt.hasNext()) {
+            int[] toPut = new int[25];
+            for (int i = 0; i != 25; i++) {
+                toPut[i] = -1;
+            }
+            scores.put( bowlIt.next(), toPut );
 		}
 
 
@@ -443,17 +444,18 @@ public class Lane extends Thread implements IPinsetterObserver {
 		//curScore[ index - 1] = score;
 		//scores.put(Cur, curScore);
 		//getScore( Cur, frame );
-		publish( lanePublish() );
-	}
+		publish(lanePublish());
+    }
 
-	/** lanePublish()
-	 *
-	 * Method that creates and returns a newly created laneEvent
-	 * 
-	 * @return		The new lane event
-	 */
-	private LaneEvent lanePublish(  ) {
-		LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, scoreTracker.getCurrentScoresAsArray(), scores, frameNumber+1, ball, gameIsHalted);
+    /**
+     * lanePublish()
+     * <p>
+     * Method that creates and returns a newly created laneEvent
+     *
+     * @return The new lane event
+     */
+    LaneEvent lanePublish() {
+        LaneEvent laneEvent = new LaneEvent(party, bowlIndex, currentThrower, scoreTracker.getCurrentScoresAsArray(), scores, frameNumber + 1, ball, gameIsHalted);
 		return laneEvent;
 	}
 
@@ -716,18 +718,29 @@ public class Lane extends Thread implements IPinsetterObserver {
         return tenthFrameStrike;
     }
     //TODO: Same as above
-    public void enableTenthFrameStrike(){
+    public void enableTenthFrameStrike() {
         tenthFrameStrike = true;
     }
 
-    public void throwBall(){
+    public void throwBall() {
         setter.ballThrown();
     }
 
-    public Iterator<Bowler> getBowlerIterator(){
+    public Iterator<Bowler> getBowlerIterator() {
         return bowlerIterator;
     }
 
+    public void setAssignedParty(boolean assigned) {
+        this.partyAssigned = assigned;
+    }
+
+    public int[][] getFinalScores() {
+        return this.finalScores;
+    }
+
+    public int getGameNumber() {
+        return gameNumber;
+    }
 //    public void incrementFrame(){
 //        frameNumber = frameNumber < 9 ? frameNumber++ : frameNumber;
 //    }
