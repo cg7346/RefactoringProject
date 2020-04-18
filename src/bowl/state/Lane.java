@@ -243,8 +243,9 @@ public class Lane extends Thread implements IPinsetterObserver {
      * @pre the party as been assigned
      * @post the iterator points to the first bowler in the party
      */
-    void resetBowlerIterator() {
+	Iterator<Bowler> resetBowlerIterator() {
         bowlerIterator = (party.getMembers()).iterator();
+        return bowlerIterator;
     }
 
     /**

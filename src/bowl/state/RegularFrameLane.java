@@ -14,7 +14,7 @@ public class RegularFrameLane implements ILaneStatus {
 
     // TODO: Scoring methods
     private final Lane lane;
-    private final Iterator bowlerIterator;
+    private Iterator bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
     private int ballNumber;
@@ -33,7 +33,7 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
-        System.out.println("Current State: Regular");
+        System.out.println("Current Frame: " + frameNumber);
         bowlIndex = 0;
         if (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting? I don't think so
@@ -49,7 +49,7 @@ public class RegularFrameLane implements ILaneStatus {
             bowlIndex++;
         }else {
             frameNumber++;
-            lane.resetBowlerIterator();
+            bowlerIterator = lane.resetBowlerIterator();
             bowlIndex = 0;
         }
         if (frameNumber == 9){
