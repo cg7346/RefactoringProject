@@ -70,6 +70,7 @@ public class FinalFrameLane implements ILaneStatus {
         int throwNumber = event.getThrowNumber();
         int totalPins = event.totalPinsDown();
 
+        lane.markScore(currentBowler, 10, event.pinsDownOnThisThrow());
         if (totalPins == 10){
             lane.resetPins();
             if (throwNumber == 1){

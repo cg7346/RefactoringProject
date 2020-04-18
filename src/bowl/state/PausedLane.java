@@ -18,8 +18,7 @@ public class PausedLane implements ILaneStatus {
         this.previousStatus = previousStatus;
     }
     /**
-     * transmits data for the run method and handles requests
-     * to change the state for executing a Lane
+     * Simply pass through as it waits for the game to be unpaused
      */
     @Override
     public void handleRun() {
@@ -36,9 +35,9 @@ public class PausedLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for receiving an assigned party and
-     * changes the state of the party
-     * @param event
+     * Pass through because we cannot handle events when paused
+     * and we should not be getting events anyways
+     * @param event the event we will not be handling
      */
     @Override
     public void handlePinsetterEvent(PinsetterEvent event) {
@@ -46,8 +45,8 @@ public class PausedLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for if a game is paused and changes the
-     * state
+     * Cannot pause a game that is already paused,
+     * so just pass through
      */
     @Override
     public void handlePauseGame() {
@@ -55,8 +54,9 @@ public class PausedLane implements ILaneStatus {
     }
 
     /**
-     * transmits the data for resuming a game and changes the
-     * state
+     * Set the state back to the previous state, hopefully
+     * it will pick up where it left off with its variables
+     * intact
      */
     @Override
     public void handleUnpauseGame() {

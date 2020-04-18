@@ -316,7 +316,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 */
 	public void receivePinsetterEvent(PinsetterEvent pe) {
 	    if (pe.pinsDownOnThisThrow() >= 0) {
-	        markScore(pe.pinsDownOnThisThrow());
+	        
             status.handlePinsetterEvent(pe);
         }
 //		//TODO: Remove this
@@ -426,13 +426,11 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * 
 	 * @param Cur		The current bowler
 	 * @param frame	The frame that bowler is on
-	 * @param ball		The ball the bowler is on
+	 * //@param ball		The ball the bowler is on
 	 * @param score	The bowler's score 
 	 */
 	//TODO: clean up the this.currentThrow, this.frame number
-	public void markScore(int score ){
-	    Bowler Cur = this.currentThrower;
-	    int frame = this.frameNumber;
+	public void markScore(Bowler Cur, int frame, int score ){
 		scoreTracker.newThrow(Cur, frame, score);
 
 

@@ -19,10 +19,12 @@ public class RegularFrameLane implements ILaneStatus {
     private Boolean canThrowAgain;
     //private Boolean tenthFameStrike;
     private int ballNumber;
+    private int frameNumber;
 
     public RegularFrameLane(Lane lane) {
         this.lane = lane;
         this.bowlerIterator = lane.getBowlerIterator();
+        this.frameNumber = 0;
     }
 
     /**
@@ -41,6 +43,10 @@ public class RegularFrameLane implements ILaneStatus {
             }
             lane.resetPins();
         }
+        frameNumber++;
+        if (frameNumber == 9){
+            lane.changeStatus(new FinalFrameLane(lane));
+        }
     }
 
     /**
@@ -53,8 +59,8 @@ public class RegularFrameLane implements ILaneStatus {
     }
 
     /**
-     * transmits data for receiving an assigned party and
-     * changes the state of the party
+     * Handles the Pinsetter Event sent when a ball is thrown
+     * It will mark the score
      * @param event
      */
     @Override
@@ -63,7 +69,7 @@ public class RegularFrameLane implements ILaneStatus {
         int throwNumber = event.getThrowNumber();
 
         System.out.println("Pins down: " + pinsDown);
-        lane.markScore(pinsDown);
+        lane.markScore(currentBowler, frameNumber, pinsDown);
         if (pinsDown >= 0){
             if (pinsDown == 10 || throwNumber == 2){
                 lane.disableThrow();

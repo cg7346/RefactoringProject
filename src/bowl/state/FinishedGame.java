@@ -37,9 +37,9 @@ public class FinishedGame implements ILaneStatus {
     }
 
     /**
-     * transmits data for receiving an assigned party and
-     * changes the state of the party
-     * @param event
+     * Pass through because we cannot handle events when the
+     * the game is over and we should not be getting events anyways
+     * @param event the event we will not be handling
      */
     @Override
     public void handlePinsetterEvent(PinsetterEvent event) {
@@ -47,8 +47,8 @@ public class FinishedGame implements ILaneStatus {
     }
 
     /**
-     * transmits data for if a game is paused and changes the
-     * state
+     * Cannot pause a game while it runs the end game report
+     * so pass through
      */
     @Override
     public void handlePauseGame() {
@@ -56,8 +56,7 @@ public class FinishedGame implements ILaneStatus {
     }
 
     /**
-     * transmits the data for resuming a game and changes the
-     * state
+     * Cannot unpause a game that is not paused
      */
     @Override
     public void handleUnpauseGame() {
