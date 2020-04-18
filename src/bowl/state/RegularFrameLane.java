@@ -33,19 +33,25 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
+        System.out.println("Current State: Regular");
         bowlIndex = 0;
         if (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting? I don't think so
             currentBowler = (Bowler) bowlerIterator.next();
+            System.out.println("Current bowler " + currentBowler.getNickName());
             canThrowAgain = true;
+            ballNumber = 0;
             while (canThrowAgain){
                 lane.throwBall();
                 ballNumber++;
             }
-            lane.resetPins();
+            lane.resetSetter();
             bowlIndex++;
+        }else {
+            frameNumber++;
+            lane.resetBowlerIterator();
+            bowlIndex = 0;
         }
-        frameNumber++;
         if (frameNumber == 9){
             lane.changeStatus(new FinalFrameLane(lane));
         }
@@ -61,14 +67,16 @@ public class RegularFrameLane implements ILaneStatus {
         int pinsDown = event.pinsDownOnThisThrow();
         int throwNumber = event.getThrowNumber();
 
-        System.out.println("Pins down: " + pinsDown);
+        System.out.println("Pins down: " + pinsDown + " Throw " + throwNumber);
         lane.markScore(currentBowler, frameNumber, pinsDown,
                 ballNumber, bowlIndex);
 
         // if all the pins were knocked down or this is their second ball
         // they cannot throw again
-        if (pinsDown == 10 || throwNumber == 2){
-            lane.disableThrow();
+        if (pinsDown == 10){
+            canThrowAgain = false;
+        }else if (throwNumber == 2){
+            canThrowAgain = false;
         }
     }
 

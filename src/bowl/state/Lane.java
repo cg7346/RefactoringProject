@@ -588,11 +588,18 @@ public class Lane extends Thread implements IPinsetterObserver {
     }
 
     /**
-     * Used by the pinsetterEvent handler to reset the setter after
-     * the 10th frame strike and each normal throw
+     * Used by the pinsetterEvent handler to reset the pins after
+     * the 10th frame strike
      */
     void resetPins(){
         setter.resetPins();
+    }
+
+    /**
+     * Used by the pinsetterEvent handler to reset the setter after
+     */
+    void resetSetter(){
+        setter.reset();
     }
 
     /**
