@@ -54,7 +54,7 @@ public class FinishedGame implements ILaneStatus {
             party = null;
             lane.setAssignedParty(false);
 
-            lane.publish(lane.lanePublish());
+            lane.publish(lane.lanePublish(false));
 
             int myIndex = 0;
             while (scoreIt.hasNext()) {

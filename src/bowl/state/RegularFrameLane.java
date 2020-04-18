@@ -17,8 +17,8 @@ public class RegularFrameLane implements ILaneStatus {
     private final Iterator bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
-    //private Boolean tenthFameStrike;
     private int ballNumber;
+    private int bowlIndex;
     private int frameNumber;
 
     public RegularFrameLane(Lane lane) {
@@ -33,15 +33,17 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
+        bowlIndex = 0;
         if (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting? I don't think so
             currentBowler = (Bowler) bowlerIterator.next();
             canThrowAgain = true;
-            //tenthFameStrike = false;
             while (canThrowAgain){
                 lane.throwBall();
+                ballNumber++;
             }
             lane.resetPins();
+            bowlIndex++;
         }
         frameNumber++;
         if (frameNumber == 9){
@@ -69,7 +71,8 @@ public class RegularFrameLane implements ILaneStatus {
         int throwNumber = event.getThrowNumber();
 
         System.out.println("Pins down: " + pinsDown);
-        lane.markScore(currentBowler, frameNumber, pinsDown);
+        lane.markScore(currentBowler, frameNumber, pinsDown,
+                ballNumber, bowlIndex);
 
         // if all the pins were knocked down or this is their second ball
         // they cannot throw again
@@ -83,6 +86,7 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
+        lane.publish(lane.lanePublish(true));
         lane.changeStatus(new PausedLane(lane, this));
     }
 

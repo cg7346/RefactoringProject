@@ -32,7 +32,7 @@ public class FinalFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
-        int bowlerIndex = 0;
+        bowlIndex = 0;
         if (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting?
             currentBowler = (Bowler) bowlerIterator.next();
@@ -40,9 +40,10 @@ public class FinalFrameLane implements ILaneStatus {
             lane.setTenthFrameStrike(false);
             while (canThrowAgain){
                 lane.throwBall();
+                ballNumber++;
             }
             lane.resetPins();
-            bowlerIndex++;
+            bowlIndex++;
             //send scores out
         }
         //transition to game finished
@@ -68,7 +69,8 @@ public class FinalFrameLane implements ILaneStatus {
         int throwNumber = event.getThrowNumber();
         int totalPins = event.totalPinsDown();
 
-        lane.markScore(currentBowler, 10, event.pinsDownOnThisThrow());
+        lane.markScore(currentBowler, 9,
+                event.pinsDownOnThisThrow(), ballNumber, bowlIndex);
         if (totalPins == 10){
             lane.resetPins();
             if (throwNumber == 1){
@@ -98,7 +100,7 @@ public class FinalFrameLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
-        //pass through
+        lane.publish(lane.lanePublish(true));
     }
 
     private void insertFinalScore(int bowlIndex) {

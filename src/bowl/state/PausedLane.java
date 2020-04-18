@@ -60,6 +60,7 @@ public class PausedLane implements ILaneStatus {
      */
     @Override
     public void handleUnpauseGame() {
+        lane.publish(lane.lanePublish(false));
         lane.changeStatus(previousStatus);
     }
 }
