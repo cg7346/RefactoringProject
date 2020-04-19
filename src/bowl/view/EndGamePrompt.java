@@ -19,8 +19,6 @@ public class EndGamePrompt implements ActionListener {
 
 	private int result;
 
-	private String selectedNick, selectedMember;
-
 	public EndGamePrompt( String partyName ) {
 
 		result =0;
@@ -44,8 +42,6 @@ public class EndGamePrompt implements ActionListener {
 		// Button Panel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 2));
-
-		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
 		yesButton = new JButton("Yes");
 		JPanel yesButtonPanel = new JPanel();
@@ -75,7 +71,7 @@ public class EndGamePrompt implements ActionListener {
 		win.setLocation(
 			((screenSize.width) / 2) - ((win.getSize().width) / 2),
 			((screenSize.height) / 2) - ((win.getSize().height) / 2));
-		win.show();
+		win.setVisible(true);
 
 	}
 
@@ -101,7 +97,7 @@ public class EndGamePrompt implements ActionListener {
 	}
 	
 	public void distroy() {
-		win.hide();
+		win.setVisible(false);
 	}
 	
 }

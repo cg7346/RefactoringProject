@@ -33,8 +33,7 @@ public class FinalFrameLane implements ILaneStatus {
     public void handleRun() {
         bowlIndex = 0;
         while (bowlerIterator.hasNext()){
-            //TODO: Can we remove this casting?
-            currentBowler = (Bowler) bowlerIterator.next();
+            currentBowler = bowlerIterator.next();
             canThrowAgain = true;
             ballNumber = 0;
             while (canThrowAgain){

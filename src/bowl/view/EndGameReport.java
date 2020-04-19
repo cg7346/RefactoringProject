@@ -57,7 +57,6 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		memberList.setVisibleRowCount(5);
 		memberList.addListSelectionListener(this);
 		JScrollPane partyPane = new JScrollPane(memberList);
-		//        partyPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		partyPanel.add(partyPane);
 
 		partyPanel.add( memberList );
@@ -66,8 +65,6 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		// Button Panel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(2, 1));
-
-		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
 		printButton = new JButton("Print Report");
 		JPanel printButtonPanel = new JPanel();
@@ -97,7 +94,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		win.setLocation(
 			((screenSize.width) / 2) - ((win.getSize().width) / 2),
 			((screenSize.height) / 2) - ((win.getSize().height) / 2));
-		win.show();
+		win.setVisible(true);
 
 	}
 
@@ -107,15 +104,16 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 			retVal.add(selectedMember);
 		}
 		if (e.getSource().equals(finished)) {		
-			win.hide();
+			win.setVisible(false);
 			result = 1;
 		}
 
 	}
 
+	@SuppressWarnings("unchecked") // Unchecked cast from Object to JList<String>
 	public void valueChanged(ListSelectionEvent e) {
 		selectedMember =
-			((String) ((JList) e.getSource()).getSelectedValue());
+			((String) ((JList<String>) e.getSource()).getSelectedValue());
 	}
 
 	public ArrayList<String> getResult() {
@@ -130,7 +128,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 	}
 	
 	public void destroy() {
-		win.hide();
+		win.setVisible(false);
 	}
 
 	public static void main( String args[] ) {
@@ -140,7 +138,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		}
 		Party party = new Party( bowlers );
 		String partyName="wank";
-		EndGameReport e = new EndGameReport( partyName, party );
+		new EndGameReport( partyName, party );
 	}
 	
 }

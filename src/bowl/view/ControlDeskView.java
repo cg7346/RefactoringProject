@@ -81,7 +81,6 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		assignPanel.setLayout(new FlowLayout());
 		assign.addActionListener(this);
 		assignPanel.add(assign);
-//		controlsPanel.add(assignPanel);
 
 		finished = new JButton("Finished");
 		JPanel finishedPanel = new JPanel();
@@ -123,7 +122,6 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		partyPane.setVerticalScrollBarPolicy(
 			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		partyPanel.add(partyPane);
-		//		partyPanel.add(partyList);
 
 		// Clean up main panel
 		colPanel.add(controlsPanel, "East");
@@ -146,7 +144,7 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		win.setLocation(
 			((screenSize.width) / 2) - ((win.getSize().width) / 2),
 			((screenSize.height) / 2) - ((win.getSize().height) / 2));
-		win.show();
+		win.setVisible(true);
 
 	}
 
@@ -159,13 +157,13 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(addParty)) {
-			AddPartyView addPartyWin = new AddPartyView(this, maxMembers);
+			new AddPartyView(this, maxMembers);
 		}
 		if (e.getSource().equals(assign)) {
 			controlDesk.assignLane();
 		}
 		if (e.getSource().equals(finished)) {
-			win.hide();
+			win.setVisible(false);
 			System.exit(0);
 		}
 	}

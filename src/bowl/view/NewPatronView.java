@@ -25,8 +25,6 @@ import javax.swing.border.*;
 
 public class NewPatronView implements ActionListener {
 
-	private int maxSize;
-
 	private JFrame win;
 	private JButton abort, finished;
 	private JLabel nickLabel, fullLabel, emailLabel;
@@ -35,7 +33,6 @@ public class NewPatronView implements ActionListener {
 
 	private boolean done;
 
-	private String selectedNick, selectedMember;
 	private AddPartyView addParty;
 
 	public NewPatronView(AddPartyView v) {
@@ -84,8 +81,6 @@ public class NewPatronView implements ActionListener {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(4, 1));
 
-		Insets buttonMargin = new Insets(4, 4, 4, 4);
-
 		finished = new JButton("Add Patron");
 		JPanel finishedPanel = new JPanel();
 		finishedPanel.setLayout(new FlowLayout());
@@ -114,14 +109,14 @@ public class NewPatronView implements ActionListener {
 		win.setLocation(
 			((screenSize.width) / 2) - ((win.getSize().width) / 2),
 			((screenSize.height) / 2) - ((win.getSize().height) / 2));
-		win.show();
+		win.setVisible(true);
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(abort)) {
 			done = true;
-			win.hide();
+			win.setVisible(false);
 		}
 
 		if (e.getSource().equals(finished)) {
@@ -130,7 +125,7 @@ public class NewPatronView implements ActionListener {
 			email = emailField.getText();
 			done = true;
 			addParty.updateNewPatron( this );
-			win.hide();
+			win.setVisible(false);
 		}
 
 	}

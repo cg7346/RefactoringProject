@@ -162,7 +162,6 @@ public class ControlDesk extends Thread {
      */
 
 	public void viewScores(Lane ln) {
-		// TODO: attach a LaneScoreView object to that lane
 	}
 
     /**
