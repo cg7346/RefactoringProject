@@ -104,9 +104,7 @@ public class ScoreReport {
 		try {
 			out.write(s + "\r\n");
 			out.flush();
-			// System.out.println(s);
 			s = in.readLine();
-			// System.out.println(s);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

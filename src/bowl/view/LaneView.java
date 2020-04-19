@@ -134,7 +134,6 @@ public class LaneView implements ILaneObserver, ActionListener {
 		if (lane.isPartyAssigned()) {
 			int numBowlers = le.getParty().getMembers().size();
 			while (!initDone) {
-				//System.out.println("chillin' here.");
 				try {
 					Thread.sleep(1);
 				} catch (Exception e) {

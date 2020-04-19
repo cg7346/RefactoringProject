@@ -57,7 +57,6 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		memberList.setVisibleRowCount(5);
 		memberList.addListSelectionListener(this);
 		JScrollPane partyPane = new JScrollPane(memberList);
-		//        partyPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		partyPanel.add(partyPane);
 
 		partyPanel.add( memberList );
@@ -113,7 +112,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 
 	public void valueChanged(ListSelectionEvent e) {
 		selectedMember =
-			((String) ((JList) e.getSource()).getSelectedValue()); // TODO: (Gio) I don't think we can do anything about this?
+			((String) ((JList) e.getSource()).getSelectedValue());
 	}
 
 	public ArrayList<String> getResult() {
@@ -138,7 +137,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		}
 		Party party = new Party( bowlers );
 		String partyName="wank";
-		/* EndGameReport e = */new EndGameReport( partyName, party ); // TODO: (Gio) This should work
+		new EndGameReport( partyName, party );
 	}
 	
 }

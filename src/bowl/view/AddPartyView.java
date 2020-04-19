@@ -174,7 +174,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 			}
 		}
 		if (e.getSource().equals(newPatron)) {
-			/*NewPatronView newPatron = */new NewPatronView( this ); // TODO: (Gio) This should work
+			new NewPatronView( this );
 		}
 		if (e.getSource().equals(finished)) {
 			if ( party != null && party.size() > 0) {
@@ -193,11 +193,11 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		if (e.getSource().equals(allBowlers)) {
 			selectedNick =
-				((String) ((JList) e.getSource()).getSelectedValue()); // TODO: (Gio) I don't think we can do anything about this?
+				((String) ((JList) e.getSource()).getSelectedValue());
 		}
 		if (e.getSource().equals(partyList)) {
 			selectedMember =
-				((String) ((JList) e.getSource()).getSelectedValue()); // TODO: (Gio) I don't think we can do anything about this?
+				((String) ((JList) e.getSource()).getSelectedValue());
 		}
 	}
 
