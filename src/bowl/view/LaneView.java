@@ -178,7 +178,7 @@ public class LaneView implements ILaneObserver, ActionListener {
 
 				//Iterate through array of strings and add to ball label
 				String[][] allThrowScores = le.getThrowScores();
-				for (int col = 0; col < allThrowScores[k].length; col++) {
+				for (int col = 0; col < allThrowScores[k].length - 1; col++) {
 					ballLabel[k][col].setText(allThrowScores[k][col]);
 				}
 			}
