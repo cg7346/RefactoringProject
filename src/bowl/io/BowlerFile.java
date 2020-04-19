@@ -44,24 +44,25 @@ public class BowlerFile {
 	public static Bowler getBowlerInfo(String nickName)
 		throws IOException, FileNotFoundException {
 
-		BufferedReader in = new BufferedReader(new FileReader(BOWLER_DAT));
-		String data;
-		while ((data = in.readLine()) != null) {
-			// File format is nick\tfname\te-mail
-			String[] bowler = data.split("\t");
-			if (nickName.equals(bowler[0])) {
-				System.out.println(
-					"Nick: "
-						+ bowler[0]
-						+ " Full: "
-						+ bowler[1]
-						+ " email: "
-						+ bowler[2]);
-				return (new Bowler(bowler[0], bowler[1], bowler[2]));
+		try (BufferedReader in = new BufferedReader(new FileReader(BOWLER_DAT))) {
+			String data;
+			while ((data = in.readLine()) != null) {
+				// File format is nick\tfname\te-mail
+				String[] bowler = data.split("\t");
+				if (nickName.equals(bowler[0])) {
+					System.out.println(
+						"Nick: "
+							+ bowler[0]
+							+ " Full: "
+							+ bowler[1]
+							+ " email: "
+							+ bowler[2]);
+					return (new Bowler(bowler[0], bowler[1], bowler[2]));
+				}
 			}
+			System.out.println("Nick not found...");
+			return null;
 		}
-		System.out.println("Nick not found...");
-		return null;
 	}
 
     /**
@@ -99,15 +100,16 @@ public class BowlerFile {
 
 		ArrayList<String> allBowlers = new ArrayList<>();
 
-		BufferedReader in = new BufferedReader(new FileReader(BOWLER_DAT));
-		String data;
-		while ((data = in.readLine()) != null) {
-			// File format is nick\tfname\te-mail
-			String[] bowler = data.split("\t");
-			//"Nick: bowler[0] Full: bowler[1] email: bowler[2]
-			allBowlers.add(bowler[0]);
+		try (BufferedReader in = new BufferedReader(new FileReader(BOWLER_DAT))) {
+			String data;
+			while ((data = in.readLine()) != null) {
+				// File format is nick\tfname\te-mail
+				String[] bowler = data.split("\t");
+				//"Nick: bowler[0] Full: bowler[1] email: bowler[2]
+				allBowlers.add(bowler[0]);
+			}
+			return allBowlers;
 		}
-		return allBowlers;
 	}
 
 }
