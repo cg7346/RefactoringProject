@@ -65,16 +65,15 @@ public class FinalFrameLane implements ILaneStatus {
                 event.pinsDownOnThisThrow(), ballNumber, bowlIndex);
         if (totalPins == 10){
             lane.resetPins();
-            if (throwNumber < 3){
+            if (throwNumber == 1){
                 tenthFrameStrike = true;
             }
-        }else{
-            if (throwNumber == 2 && !tenthFrameStrike){
-                canThrowAgain= false;
-            }
-            if (throwNumber == 3){
-                canThrowAgain = false;
-            }
+        }
+        if (totalPins != 10 && (throwNumber == 2 && !tenthFrameStrike)){
+            canThrowAgain = false;
+        }
+        if (throwNumber == 3){
+            canThrowAgain = false;
         }
     }
 
