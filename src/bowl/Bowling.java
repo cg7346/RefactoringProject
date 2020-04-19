@@ -4,7 +4,7 @@ import bowl.model.Alley;
 import bowl.model.ControlDesk;
 import bowl.view.ControlDeskView;
 
-public class Drive {
+public class Bowling {
 
 	public static void main(String[] args) {
 
