@@ -1,0 +1,1 @@
+var CodeMR_ProjectMetrics = {"Project Name":"refactoring-project-gang-gang", "Number of Highly Problematic Classes":0, "Number of Entities":35, "Number of Problematic Classes":1, "Class Lines of Code":1572, "Number of External Packages":17, "Number of Packages":6, "Number of External Entities":92}
