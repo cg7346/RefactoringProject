@@ -10,7 +10,6 @@ import java.io.*;
 import java.util.Vector;
 
 import bowl.model.Bowler;
-import bowl.model.PreviousScore;
 
 import java.util.Iterator;
 import java.net.*;

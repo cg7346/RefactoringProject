@@ -6,7 +6,7 @@
  * Window>Preferences>Java>Code Generation.
  */
 
-package bowl.model;
+package bowl.io;
 
 public class PreviousScore {
 

@@ -55,11 +55,22 @@ public class GameScore {
     }
 
     /**
-     * Get the entire list of current FrameScores for the bowler.
-     * @return An ArrayList with all the FrameScores.
+     * Get all the string representations of the throws made in each frame.
+     * @return The string representations, in an array.
      */
-    public ArrayList<FrameScore> getAllFrameScores() {
-        return frameScores;
+    public String[] getFramesThrowsArray() {
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (FrameScore frameScore : frameScores) {
+            resultList.addAll(frameScore.getBallThrowsStrings());
+        }
+
+        String[] result = new String[resultList.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = resultList.get(i);
+        }
+
+        return result;
     }
 
     /**
@@ -67,7 +78,7 @@ public class GameScore {
      * on to the next frame.
      */
     public void newFrame() {
-        frameScores.add(new FrameScore());
+        frameScores.add(new FrameScore(frameScores.size()));
     }
 
     /**
@@ -80,7 +91,7 @@ public class GameScore {
      */
     public void newThrow(int pinsDown) {
         FrameScore currentFrameScore = getRecentFrameScore();
-        getRecentFrameScore().newThrow(pinsDown);
+        currentFrameScore.newThrow(pinsDown);
 
         if (currentFrameScore.hasStrikeOccurred() || currentFrameScore.hasSpareOccurred()) {
             strikesAndSpares.add(currentFrameScore);
@@ -98,7 +109,7 @@ public class GameScore {
 
         if (!strikesAndSpares.isEmpty()) {
             for (FrameScore toAddScore : strikesAndSpares) {
-                if (!(toAddScore.getThrowsToAddCount() == 0) && !toAddScore.equals(currentFrameScore)) {
+                if (toAddScore.getThrowsToAddCount() != 0 && !toAddScore.equals(currentFrameScore)) {
                     toAddScore.addNewThrowScore(pinsDown);
                 }
             }

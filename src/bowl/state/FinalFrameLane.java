@@ -19,13 +19,12 @@ public class FinalFrameLane implements ILaneStatus {
     private Boolean canThrowAgain;
     private int ballNumber;
     private int bowlIndex;
+    private boolean tenthFrameStrike;
 
     public FinalFrameLane(Lane lane) {
         this.lane = lane;
         bowlerIterator = lane.getBowlerIterator();
     }
-
-    // TODO: Scoring Methods
 
     /**
      * Lets the bowler
@@ -33,16 +32,16 @@ public class FinalFrameLane implements ILaneStatus {
     @Override
     public void handleRun() {
         bowlIndex = 0;
-        if (bowlerIterator.hasNext()){
+        while (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting?
             currentBowler = (Bowler) bowlerIterator.next();
             canThrowAgain = true;
             ballNumber = 0;
-            lane.setTenthFrameStrike(false);
             while (canThrowAgain){
                 lane.throwBall();
                 ballNumber++;
             }
+            tenthFrameStrike = false;
             lane.resetSetter();
             lane.insertFinalScore(bowlIndex, currentBowler);
             bowlIndex++;
@@ -66,12 +65,11 @@ public class FinalFrameLane implements ILaneStatus {
                 event.pinsDownOnThisThrow(), ballNumber, bowlIndex);
         if (totalPins == 10){
             lane.resetPins();
-            if (throwNumber == 1){
-                lane.setTenthFrameStrike(true);
+            if (throwNumber < 3){
+                tenthFrameStrike = true;
             }
-        }
-        else{
-            if (throwNumber == 2 && !lane.isTenthFrameStrike()){
+        }else{
+            if (throwNumber == 2 && !tenthFrameStrike){
                 canThrowAgain= false;
             }
             if (throwNumber == 3){
@@ -95,6 +93,5 @@ public class FinalFrameLane implements ILaneStatus {
     public void handleUnpauseGame() {
         lane.publish(lane.lanePublish(true));
     }
-
 }
 

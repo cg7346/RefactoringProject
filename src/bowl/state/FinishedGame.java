@@ -46,6 +46,7 @@ public class FinishedGame implements ILaneStatus {
             lane.changeStatus(new RegularFrameLane(lane));
 
         } else if (result == 2) {// no, dont want to play another game
+            //TODO: Generate final scores for bowlers
             Vector printVector;
             EndGameReport egr = new EndGameReport(((Bowler) party.getMembers().get(0)).getNickName() + "'s Party", party);
             printVector = egr.getResult();

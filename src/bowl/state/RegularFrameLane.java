@@ -39,14 +39,10 @@ public class RegularFrameLane implements ILaneStatus {
         if (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting? I don't think so
             currentBowler = (Bowler) bowlerIterator.next();
-            System.out.println("Current bowler " + currentBowler.getNickName());
             canThrowAgain = true;
             ballNumber = 0;
             while (canThrowAgain){
                 lane.throwBall();
-                try {
-                    sleep(10000);
-                } catch (Exception e) {}
                 ballNumber++;
             }
             lane.resetSetter();
@@ -70,8 +66,6 @@ public class RegularFrameLane implements ILaneStatus {
     public void handlePinsetterEvent(PinsetterEvent event) {
         int pinsDown = event.pinsDownOnThisThrow();
         int throwNumber = event.getThrowNumber();
-        System.out.println("Current Frame: " + (frameNumber+1));
-        System.out.println("Pins down: " + pinsDown + " Throw " + throwNumber);
         lane.markScore(currentBowler, frameNumber, pinsDown,
                 ballNumber, bowlIndex);
 

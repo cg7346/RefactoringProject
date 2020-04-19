@@ -9,15 +9,21 @@ import java.util.ArrayList;
 public class FrameScore {
     //List of the number of pins knocked down on each throw for the frame
     private ArrayList<Integer> ballThrows;
+    //The representations of the ball throws in string form
+    private ArrayList<String> ballThrowsStrings;
     //Total amount of pins knocked down this frame
     private int score;
     //The count of how many throws to add to the score (for strike/spare)
     private int throwsToAddCount;
+    //The frame number this score represents (0-9)
+    private final int frameNumber;
 
-    public FrameScore() {
+    public FrameScore(int frameNumber) {
         ballThrows = new ArrayList<>();
+        ballThrowsStrings = new ArrayList<>();
         score = 0;
         throwsToAddCount = 0;
+        this.frameNumber = frameNumber;
     }
 
     /**
@@ -35,13 +41,43 @@ public class FrameScore {
      */
     public void newThrow(int pinsDown) {
         ballThrows.add(pinsDown);
+        newThrowToString(pinsDown);
         score += pinsDown;
+    }
+
+    /**
+     * Add a new throw to the list of string representations for the ball throws.
+     * A throw that results in a strike is represented with "X", and a throw that
+     * results in a spare is represented with "/". On any frame before the 10th frame,
+     * a strike has an empty string preceding it to match the format for bowling scoring
+     * tables.
+     * @param pinsDown The amount of pins knocked down for the new throw.
+     */
+    private void newThrowToString(int pinsDown) {
+        if (frameNumber < 9) {
+            if (pinsDown == 10) {
+                ballThrowsStrings.add("");
+                ballThrowsStrings.add("X");
+                return;
+            }
+        } else if (frameNumber == 9) {
+            if (pinsDown == 10) {
+                ballThrowsStrings.add("X");
+                return;
+            }
+        }
+
+        if (hasSpareOccurred()) {
+            ballThrowsStrings.add("/");
+        } else {
+            ballThrowsStrings.add(String.valueOf(pinsDown));
+        }
     }
 
     /**
      * A strike has occurred for the frame if all 10 pins were knocked
      * down in one throw. This also means that the scores of the next
-     * two throws get added on to this frame.
+     * 2 throws get added on to this frame.
      * This method is not used on the 10th frame.
      * @return True if there was a strike, false otherwise.
      */
@@ -57,16 +93,11 @@ public class FrameScore {
     /**
      * A spare has occurred for the frame if all 10 pins were knocked
      * down in two throws, and if a strike has not occurred. This also
-     * means that the scores of the next 1 throw gets added on to this frame.
-     * This method is not used on the 10th frame.
+     * means that the score of the next 1 throw gets added on to this frame.
      * @return True if there was a strike, false otherwise.
      */
     public boolean hasSpareOccurred() {
-        if (hasStrikeOccurred()) {
-            return false;
-        }
-
-        if (totalPinsDown() >= 10) {
+        if (totalPinsDown() == 10 && ballThrows.size() == 2) {
             throwsToAddCount = 1;
             return true;
         }
@@ -108,35 +139,10 @@ public class FrameScore {
     }
 
     /**
-     * Get the list of number of pins knocked down per ball throw.
-     * @return An arraylist containing each throw for the frame.
+     * Get the string representations of the ball throws for the frame.
+     * @return The string representations in an ArrayList.
      */
-    public ArrayList<Integer> getBallThrows() {
-        return ballThrows;
-    }
-
-    /**
-     * Convert the throws for this frame into string form. The array
-     * will be of size 2, or 3 for frame 10. Any empty spaces (where
-     * a throw was not made) will be filled with an empty string. Strikes
-     * are marked with an "X" and spares are marked with a "/".
-     * @return An array of Strings.
-     */
-    public String[] getBallThrowsAsArray() {
-        String[] result = new String[ballThrows.size()];
-
-        /* Work in progress */
-
-
-//        if (hasStrikeOccurred()) {
-//            result[0] = ballThrows.get(0);
-//            result[1] = -1;
-//        } else {
-//            for (int i = 0; i < 2; i++) {
-//                result[i] = ballThrows.get(i);
-//            }
-//        }
-
-        return result;
+    public ArrayList<String> getBallThrowsStrings() {
+        return ballThrowsStrings;
     }
 }

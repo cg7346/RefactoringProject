@@ -17,19 +17,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 
 public class LaneView implements ILaneObserver, ActionListener {
 
-	private int roll;
-	private boolean initDone = true;
+	private boolean initDone;
 
 	JFrame frame;
 	Container cpanel;
 	Vector bowlers;
-	int cur;
-	Iterator bowlIt;
 
 	JPanel[][] balls;
 	JLabel[][] ballLabel;
@@ -180,39 +178,12 @@ public class LaneView implements ILaneObserver, ActionListener {
 							(new Integer(lescores[k][i])).toString());
 				}
 
-
 				//Iterate through array of strings and add to ball label
-				for (int col = 0; col < 21; col++) {
-
-				}
-
-
-
-				for (int i = 0; i < 21; i++) {
-					if (((int[]) le.getScore().get(bowlers.get(k)))[i] != -1)
-						if (((int[]) le.getScore().get(bowlers.get(k)))[i] == 10 && (i % 2 == 0 || i == 19))
-							ballLabel[k][i].setText("X");
-						else if (
-								i > 0
-										&& ((int[]) le.getScore()
-										.get(bowlers.get(k)))[i]
-										+ ((int[]) le.getScore()
-										.get(bowlers.get(k)))[i
-										- 1]
-										== 10
-										&& i % 2 == 1)
-							ballLabel[k][i].setText("/");
-						else if (((int[]) le.getScore().get(bowlers.get(k)))[i] == -2) {
-
-							ballLabel[k][i].setText("F");
-						} else
-							ballLabel[k][i].setText(
-									(new Integer(((int[]) le.getScore()
-											.get(bowlers.get(k)))[i]))
-											.toString());
+				String[][] allThrowScores = le.getThrowScores();
+				for (int col = 0; col < allThrowScores[k].length; col++) {
+					ballLabel[k][col].setText(allThrowScores[k][col]);
 				}
 			}
-
 		}
 	}
 
