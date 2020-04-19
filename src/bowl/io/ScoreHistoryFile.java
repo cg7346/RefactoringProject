@@ -27,9 +27,9 @@ public class ScoreHistoryFile {
 		out.close();
 	}
 
-	public static Vector getScores(String nick)
+	public static ArrayList<PreviousScore> getScores(String nick)
 		throws IOException, FileNotFoundException {
-		Vector scores = new Vector();
+		ArrayList<PreviousScore> scores = new ArrayList<>();
 
 		BufferedReader in =
 			new BufferedReader(new FileReader(SCOREHISTORY_DAT));

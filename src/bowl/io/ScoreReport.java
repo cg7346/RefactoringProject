@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import bowl.model.Bowler;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.net.*;
 import java.awt.print.*;
@@ -22,7 +23,7 @@ public class ScoreReport {
 	public ScoreReport( Bowler bowler, int[] scores, int games ) {
 		String nick = bowler.getNick();
 		String full = bowler.getFullName();
-		Vector v = null;
+		ArrayList<PreviousScore> v = null;
 		try{
 			v = ScoreHistoryFile.getScores(nick);
 		} catch (Exception e){System.err.println("Error: " + e);}
