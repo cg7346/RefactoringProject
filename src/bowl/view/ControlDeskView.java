@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
@@ -112,10 +113,10 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		partyPanel.setLayout(new FlowLayout());
 		partyPanel.setBorder(new TitledBorder("Party Queue"));
 
-		Vector empty = new Vector();
+		ArrayList<String> empty = new ArrayList<>();
 		empty.add("(Empty)");
 
-		partyList = new JList(empty);
+		partyList = new JList(new Vector<String>(empty));
 		partyList.setFixedCellWidth(120);
 		partyList.setVisibleRowCount(10);
 		JScrollPane partyPane = new JScrollPane(partyList);

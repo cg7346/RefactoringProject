@@ -146,6 +146,7 @@ import bowl.observers.IPinsetterObserver;
 import bowl.view.EndGamePrompt;
 import bowl.view.EndGameReport;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -154,7 +155,7 @@ import java.util.Vector;
 public class Lane extends Thread implements IPinsetterObserver {
     private Party party;
     private final Pinsetter setter;
-    private final Vector subscribers;
+    private final ArrayList<ILaneObserver> subscribers;
 
     private boolean gameIsHalted;
 
@@ -184,7 +185,7 @@ public class Lane extends Thread implements IPinsetterObserver {
     public Lane() {
         this.status = new OpenLane(this);
         this.setter = new Pinsetter();
-        this.subscribers = new Vector();
+        this.subscribers = new ArrayList<>();
 
         this.gameIsHalted = false;
         this.partyAssigned = false;
