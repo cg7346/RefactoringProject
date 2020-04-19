@@ -190,14 +190,14 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
  * @param e the ListActionEvent that triggered the handler
  */
 
+	@SuppressWarnings("unchecked") // Unchecked cast from Object to JList<String>
 	public void valueChanged(ListSelectionEvent e) {
 		if (e.getSource().equals(allBowlers)) {
-			selectedNick =
-				((String) ((JList) e.getSource()).getSelectedValue());
+			selectedNick = ((String) ((JList<String>) e.getSource()).getSelectedValue());
 		}
 		if (e.getSource().equals(partyList)) {
 			selectedMember =
-				((String) ((JList) e.getSource()).getSelectedValue());
+				((String) ((JList<String>) e.getSource()).getSelectedValue());
 		}
 	}
 

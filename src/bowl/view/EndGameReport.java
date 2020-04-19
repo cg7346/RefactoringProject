@@ -110,9 +110,10 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 
 	}
 
+	@SuppressWarnings("unchecked") // Unchecked cast from Object to JList<String>
 	public void valueChanged(ListSelectionEvent e) {
 		selectedMember =
-			((String) ((JList) e.getSource()).getSelectedValue());
+			((String) ((JList<String>) e.getSource()).getSelectedValue());
 	}
 
 	public ArrayList<String> getResult() {
