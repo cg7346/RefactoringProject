@@ -5,6 +5,8 @@ import bowl.model.Bowler;
 
 import java.util.Iterator;
 
+import static java.lang.Thread.sleep;
+
 /**
  * @StatePattern: Concrete State
  * <p>
@@ -42,6 +44,9 @@ public class RegularFrameLane implements ILaneStatus {
             ballNumber = 0;
             while (canThrowAgain){
                 lane.throwBall();
+                try {
+                    sleep(10000);
+                } catch (Exception e) {}
                 ballNumber++;
             }
             lane.resetSetter();

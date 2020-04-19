@@ -232,7 +232,10 @@ public class Lane extends Thread implements IPinsetterObserver {
 	 * @param pe 		The pinsetter event that has been received.
 	 */
 	public void receivePinsetterEvent(PinsetterEvent pe) {
-	    status.handlePinsetterEvent(pe);
+	    if (pe.pinsDownOnThisThrow() >= 0){
+            status.handlePinsetterEvent(pe);
+        }
+
 	}
 	
 	/**
@@ -314,7 +317,7 @@ public class Lane extends Thread implements IPinsetterObserver {
         this.frameNumber = frame;
         this.ball = ball;
 
-        scoreTracker.newThrow(Cur, frame+1, score);
+        scoreTracker.newThrow(Cur, frame, score);
 
 
         //int[] curScore;
