@@ -207,11 +207,11 @@ public class PinSetterView implements IPinsetterObserver {
     }
 
     public void show() {
-        frame.show();
+        frame.setVisible(true);
     }
 
     public void hide() {
-        frame.hide();
+        frame.setVisible(false);
     }
 
     public static void main(String[] args) {

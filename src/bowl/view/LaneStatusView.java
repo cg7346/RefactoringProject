@@ -153,7 +153,7 @@ public class LaneStatusView implements ActionListener, ILaneObserver, IPinsetter
 	}
 
 	public void receivePinsetterEvent(PinsetterEvent pe) {
-		pinsDown.setText( ( new Integer(pe.totalPinsDown()) ).toString() );
+		pinsDown.setText( ( Integer.valueOf(pe.totalPinsDown()) ).toString() );
 //		foul.setText( ( new Boolean(pe.isFoulCommited()) ).toString() );
 		
 	}

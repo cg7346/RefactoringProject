@@ -48,7 +48,7 @@ public class LaneView implements ILaneObserver, ActionListener {
 
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				frame.hide();
+				frame.setVisible(false);
 			}
 		});
 
@@ -57,11 +57,11 @@ public class LaneView implements ILaneObserver, ActionListener {
 	}
 
 	public void show() {
-		frame.show();
+		frame.setVisible(true);
 	}
 
 	public void hide() {
-		frame.hide();
+		frame.setVisible(false);
 	}
 
 	private JPanel makeFrame(Party party) {
@@ -171,7 +171,7 @@ public class LaneView implements ILaneObserver, ActionListener {
 				for (int i = 0; i <= le.getFrameNum() - 1; i++) {
 					if (lescores[k][i] != 0)
 						scoreLabel[k][i].setText(
-							(new Integer(lescores[k][i])).toString());
+							( Integer.valueOf(lescores[k][i])).toString());
 				}
 
 				//Iterate through array of strings and add to ball label

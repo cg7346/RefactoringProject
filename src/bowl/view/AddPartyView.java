@@ -152,7 +152,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 		win.setLocation(
 			((screenSize.width) / 2) - ((win.getSize().width) / 2),
 			((screenSize.height) / 2) - ((win.getSize().height) / 2));
-		win.show();
+		win.setVisible(true);
 
 	}
 
@@ -180,7 +180,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 			if ( party != null && party.size() > 0) {
 				controlDesk.updateAddParty( this );
 			}
-			win.hide();
+			win.setVisible(false);
 		}
 
 	}
@@ -193,11 +193,11 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		if (e.getSource().equals(allBowlers)) {
 			selectedNick =
-				((String) ((JList) e.getSource()).getSelectedValue());
+				((String) ((JList) e.getSource()).getSelectedValue()); // TODO: (Gio) I don't think we can do anything about this?
 		}
 		if (e.getSource().equals(partyList)) {
 			selectedMember =
-				((String) ((JList) e.getSource()).getSelectedValue());
+				((String) ((JList) e.getSource()).getSelectedValue()); // TODO: (Gio) I don't think we can do anything about this?
 		}
 	}
 
