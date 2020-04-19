@@ -23,7 +23,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 
 	private JFrame win;
 	private JButton printButton, finished;
-	private JList memberList;
+	private JList<String> memberList;
 	private ArrayList<String> myVector;
 	private ArrayList<String> retVal;
 
@@ -52,7 +52,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		while (iter.hasNext()){
 			myVector.add( ((Bowler)iter.next()).getNick() );
 		}	
-		memberList = new JList(new Vector<String>(myVector));
+		memberList = new JList<String>(new Vector<String>(myVector));
 		memberList.setFixedCellWidth(120);
 		memberList.setVisibleRowCount(5);
 		memberList.addListSelectionListener(this);

@@ -85,7 +85,7 @@ public class ControlDesk extends Thread {
 
 	public ControlDesk(int numLanes) {
 		this.numLanes = numLanes;
-		lanes = new HashSet(numLanes);
+		lanes = new HashSet<Lane>(numLanes);
 		partyQueue = new LinkedList<>();
 
 		subscribers = new ArrayList<>();
@@ -250,7 +250,7 @@ public class ControlDesk extends Thread {
      *
      */
 
-	public HashSet getLanes() {
+	public HashSet<Lane> getLanes() {
 		return lanes;
 	}
 }

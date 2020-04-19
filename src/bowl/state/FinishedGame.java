@@ -49,7 +49,7 @@ public class FinishedGame implements ILaneStatus {
             EndGameReport egr = new EndGameReport(((Bowler) party.getMembers().get(0)).getNickName() + "'s Party", party);
             printVector = egr.getResult();
             lane.setAssignedParty(false);
-            Iterator scoreIt = party.getMembers().iterator();
+            Iterator<Bowler> scoreIt = party.getMembers().iterator();
             party = null;
             lane.setAssignedParty(false);
 
@@ -60,7 +60,7 @@ public class FinishedGame implements ILaneStatus {
                 Bowler thisBowler = (Bowler) scoreIt.next();
                 ScoreReport sr = new ScoreReport(thisBowler, lane.getFinalScores()[myIndex++], lane.getGameNumber());
                 sr.sendEmail(thisBowler.getEmail());
-                Iterator printIt = printVector.iterator();
+                Iterator<String> printIt = printVector.iterator();
                 while (printIt.hasNext()) {
                     if (thisBowler.getNick() == printIt.next()) {
                         System.out.println("Printing " + thisBowler.getNick());

@@ -38,7 +38,7 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 	private final JButton finished;
 	private final JButton assign;
 	private final JFrame win;
-	private final JList partyList;
+	private final JList<String> partyList;
 
 	/**
 	 * The maximum  number of members in a party
@@ -95,7 +95,7 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		laneStatusPanel.setLayout(new GridLayout(numLanes, 1));
 		laneStatusPanel.setBorder(new TitledBorder("Lane Status"));
 
-		HashSet lanes=controlDesk.getLanes();
+		HashSet<Lane> lanes=controlDesk.getLanes();
 		Iterator<Lane> it = lanes.iterator();
 		int laneCount=0;
 		while (it.hasNext()) {
@@ -116,7 +116,7 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		ArrayList<String> empty = new ArrayList<>();
 		empty.add("(Empty)");
 
-		partyList = new JList(new Vector<String>(empty));
+		partyList = new JList<String>(new Vector<String>(empty));
 		partyList.setFixedCellWidth(120);
 		partyList.setVisibleRowCount(10);
 		JScrollPane partyPane = new JScrollPane(partyList);
