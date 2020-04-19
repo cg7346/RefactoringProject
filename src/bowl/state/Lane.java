@@ -314,7 +314,7 @@ public class Lane extends Thread implements IPinsetterObserver {
         this.frameNumber = frame;
         this.ball = ball;
 
-        scoreTracker.newThrow(Cur, frame, score);
+        scoreTracker.newThrow(Cur, frame+1, score);
 
 
         //int[] curScore;

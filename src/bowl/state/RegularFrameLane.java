@@ -33,7 +33,6 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handleRun() {
-        System.out.println("Current Frame: " + frameNumber);
         bowlIndex = 0;
         if (bowlerIterator.hasNext()){
             //TODO: Can we remove this casting? I don't think so
@@ -66,7 +65,7 @@ public class RegularFrameLane implements ILaneStatus {
     public void handlePinsetterEvent(PinsetterEvent event) {
         int pinsDown = event.pinsDownOnThisThrow();
         int throwNumber = event.getThrowNumber();
-
+        System.out.println("Current Frame: " + (frameNumber+1));
         System.out.println("Pins down: " + pinsDown + " Throw " + throwNumber);
         lane.markScore(currentBowler, frameNumber, pinsDown,
                 ballNumber, bowlIndex);
@@ -85,7 +84,6 @@ public class RegularFrameLane implements ILaneStatus {
      */
     @Override
     public void handlePauseGame() {
-        System.out.println("GOING TO PAUSED---------");
         lane.publish(lane.lanePublish(true));
         lane.changeStatus(new PausedLane(lane, this));
     }
