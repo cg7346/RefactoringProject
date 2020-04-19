@@ -48,7 +48,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		partyPanel.setBorder(new TitledBorder("Party Members"));
 		
 		myVector = new ArrayList<>();
-		Iterator iter = (party.getMembers()).iterator();
+		Iterator<Bowler> iter = (party.getMembers()).iterator();
 		while (iter.hasNext()){
 			myVector.add( ((Bowler)iter.next()).getNick() );
 		}	

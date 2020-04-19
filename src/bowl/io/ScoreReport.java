@@ -28,7 +28,7 @@ public class ScoreReport {
 			v = ScoreHistoryFile.getScores(nick);
 		} catch (Exception e){System.err.println("Error: " + e);}
 		
-		Iterator scoreIt = v.iterator();
+		Iterator<PreviousScore> scoreIt = v.iterator();
 		
 		content = "";
 		content += "--Lucky Strike Bowling Alley Score Report--\n";

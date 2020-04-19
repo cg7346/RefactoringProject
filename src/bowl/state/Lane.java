@@ -160,7 +160,7 @@ public class Lane extends Thread implements IPinsetterObserver {
     private boolean gameIsHalted;
 
     private boolean partyAssigned;
-    private Iterator bowlerIterator;
+    private Iterator<Bowler> bowlerIterator;
     private int ball;
     private int bowlIndex;
     private int frameNumber;
@@ -360,7 +360,7 @@ public class Lane extends Thread implements IPinsetterObserver {
      */
     public void publish(LaneEvent event) {
         if (subscribers.size() > 0) {
-            Iterator eventIterator = subscribers.iterator();
+            Iterator<ILaneObserver> eventIterator = subscribers.iterator();
 
             while (eventIterator.hasNext()) {
                 ((ILaneObserver) eventIterator.next()).receiveLaneEvent(event);

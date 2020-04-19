@@ -96,7 +96,7 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 		laneStatusPanel.setBorder(new TitledBorder("Lane Status"));
 
 		HashSet lanes=controlDesk.getLanes();
-		Iterator it = lanes.iterator();
+		Iterator<Lane> it = lanes.iterator();
 		int laneCount=0;
 		while (it.hasNext()) {
 			Lane curLane = (Lane) it.next();

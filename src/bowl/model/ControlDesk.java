@@ -146,7 +146,7 @@ public class ControlDesk extends Thread {
      */
 
 	public void assignLane() {
-		Iterator it = lanes.iterator();
+		Iterator<Lane> it = lanes.iterator();
 
 		while (it.hasNext() && !partyQueue.isEmpty()) {
 			Lane curLane = (Lane) it.next();
@@ -233,7 +233,7 @@ public class ControlDesk extends Thread {
      */
 
 	public void publish(ControlDeskEvent event) {
-		Iterator eventIterator = subscribers.iterator();
+		Iterator<IControlDeskObserver> eventIterator = subscribers.iterator();
 		while (eventIterator.hasNext()) {
 			(
 				(IControlDeskObserver) eventIterator

@@ -15,7 +15,7 @@ import static java.lang.Thread.sleep;
 public class RegularFrameLane implements ILaneStatus {
 
     private final Lane lane;
-    private Iterator bowlerIterator;
+    private Iterator<Bowler> bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
     private int ballNumber;

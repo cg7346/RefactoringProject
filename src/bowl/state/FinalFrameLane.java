@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class FinalFrameLane implements ILaneStatus {
 
     private final Lane lane;
-    private final Iterator bowlerIterator;
+    private final Iterator<Bowler> bowlerIterator;
     private Bowler currentBowler;
     private Boolean canThrowAgain;
     private int ballNumber;
