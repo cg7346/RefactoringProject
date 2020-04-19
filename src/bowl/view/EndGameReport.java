@@ -67,8 +67,6 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(2, 1));
 
-		Insets buttonMargin = new Insets(4, 4, 4, 4);
-
 		printButton = new JButton("Print Report");
 		JPanel printButtonPanel = new JPanel();
 		printButtonPanel.setLayout(new FlowLayout());
@@ -140,7 +138,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		}
 		Party party = new Party( bowlers );
 		String partyName="wank";
-		EndGameReport e = new EndGameReport( partyName, party );
+		/* EndGameReport e = */new EndGameReport( partyName, party ); // TODO: (Gio) This should work
 	}
 	
 }

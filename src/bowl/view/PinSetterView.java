@@ -215,7 +215,7 @@ public class PinSetterView implements IPinsetterObserver {
     }
 
     public static void main(String[] args) {
-        PinSetterView pg = new PinSetterView(1);
+        /*PinSetterView pg = */new PinSetterView(1); // TODO: (Gio) This should work
     }
 
 }

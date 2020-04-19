@@ -63,8 +63,6 @@ public class ScoreReport {
 				new BufferedWriter(
 					new OutputStreamWriter(s.getOutputStream(), "8859_1"));
 
-			String boundary = "DataSeparatorString";
-
 			// here you are supposed to send your username
 			sendln(in, out, "HELO world");
 			sendln(in, out, "MAIL FROM: <abc1234@rit.edu>");

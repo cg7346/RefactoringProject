@@ -152,8 +152,6 @@ public class LaneView implements ILaneObserver, ActionListener {
 				JPanel buttonPanel = new JPanel();
 				buttonPanel.setLayout(new FlowLayout());
 
-				Insets buttonMargin = new Insets(4, 4, 4, 4);
-
 				maintenance = new JButton("Maintenance Call");
 				JPanel maintenancePanel = new JPanel();
 				maintenancePanel.setLayout(new FlowLayout());

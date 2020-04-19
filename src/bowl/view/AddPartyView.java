@@ -51,7 +51,6 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 	private JList<String> partyList, allBowlers;
 	private ArrayList<String> party;
 	private ArrayList<String> bowlerdb;
-	private Integer lock;
 
 	private ControlDeskView controlDesk;
 
@@ -109,8 +108,6 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 		// Button Panel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(4, 1));
-
-		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
 		addPatron = new JButton("Add to Party");
 		JPanel addPatronPanel = new JPanel();
@@ -177,7 +174,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 			}
 		}
 		if (e.getSource().equals(newPatron)) {
-			NewPatronView newPatron = new NewPatronView( this );
+			/*NewPatronView newPatron = */new NewPatronView( this ); // TODO: (Gio) This should work
 		}
 		if (e.getSource().equals(finished)) {
 			if ( party != null && party.size() > 0) {

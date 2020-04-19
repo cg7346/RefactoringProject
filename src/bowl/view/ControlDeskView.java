@@ -159,7 +159,7 @@ public class ControlDeskView implements ActionListener, IControlDeskObserver {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(addParty)) {
-			AddPartyView addPartyWin = new AddPartyView(this, maxMembers);
+			/*AddPartyView addPartyWin = */new AddPartyView(this, maxMembers); // TODO (Gio) This should work
 		}
 		if (e.getSource().equals(assign)) {
 			controlDesk.assignLane();
