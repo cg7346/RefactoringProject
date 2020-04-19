@@ -49,6 +49,7 @@ import bowl.state.Lane;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -60,7 +61,7 @@ public class ControlDesk extends Thread {
 	/**
 	 * The collection of Lanes
 	 */
-	private final HashSet lanes;
+	private final HashSet<Lane> lanes;
 
 	/**
 	 * The party wait queue
@@ -73,7 +74,7 @@ public class ControlDesk extends Thread {
 	private final int numLanes;
 
 	/** The collection of subscribers */
-	private final Vector subscribers;
+	private final ArrayList<IControlDeskObserver> subscribers;
 
     /**
      * Constructor for the ControlDesk class
@@ -85,9 +86,9 @@ public class ControlDesk extends Thread {
 	public ControlDesk(int numLanes) {
 		this.numLanes = numLanes;
 		lanes = new HashSet(numLanes);
-		partyQueue = new LinkedList<Party>();
+		partyQueue = new LinkedList<>();
 
-		subscribers = new Vector();
+		subscribers = new ArrayList<>();
 
 		for (int i = 0; i < numLanes; i++) {
 			lanes.add(new Lane());
@@ -190,14 +191,14 @@ public class ControlDesk extends Thread {
      *
 	 */
 
-	public Vector getPartyQueue() {
-		Vector displayPartyQueue = new Vector();
+	public ArrayList<String> getPartyQueue() {
+		ArrayList<String> displayPartyQueue = new ArrayList<>();
 		for (int i = 0; i < partyQueue.size(); i++) {
 			String nextParty =
 					((Bowler) ((Party)partyQueue.toArray()[i]).getMembers()
 							.get(0))
 							.getNickName() + "'s Party";
-			displayPartyQueue.addElement(nextParty);
+			displayPartyQueue.add(nextParty);
 		}
 		return displayPartyQueue;
 	}

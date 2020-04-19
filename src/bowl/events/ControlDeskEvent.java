@@ -20,7 +20,7 @@ import java.util.*;
 public class ControlDeskEvent {
 
 	/** A representation of the wait queue, containing party names */
-	private Vector partyQueue;
+	private ArrayList<String> partyQueue;
 
     /**
      * Contstructor for the ControlDeskEvent
@@ -29,7 +29,7 @@ public class ControlDeskEvent {
      *
      */
 
-	public ControlDeskEvent( Vector partyQueue ) {
+	public ControlDeskEvent( ArrayList<String> partyQueue ) {
 		this.partyQueue = partyQueue;
 	}
 
@@ -41,7 +41,7 @@ public class ControlDeskEvent {
      *
      */
 
-	public Vector getPartyQueue() {
+	public ArrayList<String> getPartyQueue() {
 		return partyQueue;
 	}
 
