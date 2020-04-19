@@ -5,8 +5,6 @@ import bowl.model.Bowler;
 
 import java.util.Iterator;
 
-import static java.lang.Thread.sleep;
-
 /**
  * @StatePattern: Concrete State
  * <p>

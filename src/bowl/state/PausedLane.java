@@ -2,8 +2,6 @@ package bowl.state;
 
 import bowl.events.PinsetterEvent;
 
-import java.sql.SQLOutput;
-
 /**
  * @StatePattern: Concrete State
  * <p>

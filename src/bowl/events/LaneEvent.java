@@ -25,8 +25,6 @@
 
 package bowl.events;
 
-import java.util.HashMap;
-
 import bowl.model.Bowler;
 import bowl.model.Party;
 

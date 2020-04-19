@@ -7,7 +7,6 @@
 package bowl.io;
 
 import java.io.*;
-import java.util.Vector;
 
 import bowl.model.Bowler;
 

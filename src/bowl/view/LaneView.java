@@ -18,9 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Vector;
 
 public class LaneView implements ILaneObserver, ActionListener {
 
