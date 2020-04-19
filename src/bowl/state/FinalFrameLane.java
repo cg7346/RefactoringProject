@@ -43,7 +43,7 @@ public class FinalFrameLane implements ILaneStatus {
             }
             tenthFrameStrike = false;
             lane.resetSetter();
-            lane.insertFinalScore(bowlIndex, currentBowler);
+            lane.insertFinalScore(currentBowler);
             bowlIndex++;
 
         }

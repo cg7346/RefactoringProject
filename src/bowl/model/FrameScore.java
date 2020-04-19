@@ -55,7 +55,7 @@ public class FrameScore {
      */
     private void newThrowToString(int pinsDown) {
         if (frameNumber < 9) {
-            if (pinsDown == 10) {
+            if (hasStrikeOccurred()) {
                 ballThrowsStrings.add("");
                 ballThrowsStrings.add("X");
                 return;

@@ -68,10 +68,4 @@ public class Bowler {
 		}
 		return retval;
 	}
-
-	//TODO: Get rid of this later
-	@Override
-	public String toString() {
-    	return "Bowler " + nickName;
-	}
 }

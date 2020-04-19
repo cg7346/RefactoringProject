@@ -1,35 +1,40 @@
 package bowl.model;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
  * This class is used by a Lane in order to handle scoring for the Bowlers.
  */
 public class ScoreTracker {
-    //Map of Bowlers to their current GameScores
+    //Map of Bowlers to their GameScores (scores for the current game)
     private HashMap<Bowler, GameScore> currentScores;
+    //Map of Bowlers to their FinalScores (scores for multiple games)
+    private HashMap<Bowler, FinalScore> finalScores;
     //The current frame that the Pinsetter of the Lane is on
     private int frameNumber;
 
     public ScoreTracker() {
         currentScores = new HashMap<>();
+        finalScores = new HashMap<>();
         frameNumber = 0;
     }
 
     /**
      * Set up the score tracker for a new game by assigning a
-     * new GameScore object to each Bowler.
+     * new GameScore object to each Bowler. Each Bowler also
+     * gets a new FinalScore object if they do not have one already.
      * @param party The party at the Lane.
      */
     public void newGame(Party party) {
-        //TODO: If frameNumber is not 0, add all gamescores onto finalscores
         //Object type cast preserves original Vector implementation of Party
         for (Object bowler : party.getMembers()) {
             currentScores.put((Bowler) bowler, new GameScore());
+
+            if (finalScores.isEmpty()) {
+                finalScores.put((Bowler) bowler, new FinalScore());
+            }
         }
 
-        makeNewFrames();
         frameNumber = 0;
     }
 
@@ -92,6 +97,31 @@ public class ScoreTracker {
         for (GameScore gameScore : currentScores.values()) {
             result[row] = gameScore.getFramesThrowsArray();
             row++;
+        }
+
+        return result;
+    }
+
+    public void logGameScore(Bowler bowler) {
+        GameScore toLog = currentScores.get(bowler);
+        finalScores.get(bowler).addNewGameScore(toLog);
+    }
+
+    /**
+     * Get the final score of a bowler for the current game.
+     * @param bowler The bowler being checked.
+     * @return The score of the bowler.
+     */
+    public int getGameScore(Bowler bowler) {
+        return currentScores.get(bowler).getScore();
+    }
+
+    public int[][] getAllFinalScores() {
+        int[][] result = new int[finalScores.keySet().size()][frameNumber + 1];
+
+        int row = 0;
+        for (Bowler bowler : finalScores.keySet()) {
+            result[row] = finalScores.get(bowler).getScores();
         }
 
         return result;

@@ -15,8 +15,6 @@ public class OpenLane implements ILaneStatus {
         this.lane = lane;
     }
 
-    // TODO: resetting scores method
-
     /**
      * simply check if a party has been assigned, and if
      * so transition into a regular frame game

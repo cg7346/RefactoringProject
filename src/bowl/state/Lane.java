@@ -164,9 +164,7 @@ public class Lane extends Thread implements IPinsetterObserver {
     private int bowlIndex;
     private int frameNumber;
 
-	private int[][] cumulScores; //[bowler index][frame] = score
-
-    private int[][] finalScores; //[bowler index][game number] = score
+    //Game number the lane is on (starts at -1 until party assigned)
     private int gameNumber;
 
     private Bowler currentThrower;            // = the thrower who just took a throw
@@ -190,8 +188,7 @@ public class Lane extends Thread implements IPinsetterObserver {
 
         this.gameIsHalted = false;
         this.partyAssigned = false;
-
-        this.gameNumber = 0;
+        gameNumber = -1;
 
         this.setter.subscribe(this);
         this.scoreTracker = new ScoreTracker();
@@ -259,6 +256,7 @@ public class Lane extends Thread implements IPinsetterObserver {
     void resetScores() {
         scoreTracker.newGame(party);
 		frameNumber = 0;
+		gameNumber++;
 	}
 
 	/** assignParty()
@@ -275,11 +273,10 @@ public class Lane extends Thread implements IPinsetterObserver {
         resetBowlerIterator();
         partyAssigned = true;
 
+        //A new party has not done any games yet
+        scoreTracker = new ScoreTracker();
         scoreTracker.newGame(theParty);
-
-        cumulScores = new int[party.getMembers().size()][10];
-        finalScores = new int[party.getMembers().size()][128]; //Hardcoding a max of 128 games, bite me.
-        gameNumber = 0;
+        gameNumber = -1;
 
         resetScores();
     }
@@ -456,7 +453,7 @@ public class Lane extends Thread implements IPinsetterObserver {
      * @return the final scores at the end of the game
      */
     int[][] getFinalScores() {
-        return this.finalScores;
+        return scoreTracker.getAllFinalScores();
     }
 
     /**
@@ -472,12 +469,18 @@ public class Lane extends Thread implements IPinsetterObserver {
         return party;
     }
 
-    void insertFinalScore(int bowlIndex, Bowler bowler){
-    finalScores[bowlIndex][gameNumber] = cumulScores[bowlIndex][9];
+    /**
+     * Log the final game score of a bowler in the score tracker, and
+     * in the score history file.
+     * @param bowler The bowler being logged.
+     */
+    void insertFinalScore(Bowler bowler){
+        scoreTracker.logGameScore(bowler);
+
         try {
             Date date = new Date();
             String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
-            ScoreHistoryFile.addScore(bowler.getNick(), dateString, new Integer(cumulScores[bowlIndex][9]).toString());
+            ScoreHistoryFile.addScore(bowler.getNick(), dateString, String.valueOf(scoreTracker.getGameScore(bowler)));
         } catch (Exception e) {
              System.err.println("Exception in addScore. " + e);
         }

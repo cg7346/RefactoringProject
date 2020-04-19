@@ -10,9 +10,15 @@ public class GameScore {
     private ArrayList<FrameScore> frameScores;
     private ArrayList<FrameScore> strikesAndSpares;
 
+    /**
+     * Create a new GameScore object with one FrameScore
+     * to represent the first frame (frame 0).
+     */
     public GameScore() {
         frameScores = new ArrayList<>();
         strikesAndSpares = new ArrayList<>();
+
+        frameScores.add(new FrameScore(0));
     }
 
     /**
