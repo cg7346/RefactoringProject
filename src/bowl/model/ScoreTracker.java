@@ -26,11 +26,14 @@ public class ScoreTracker {
      * @param party The party at the Lane.
      */
     public void newGame(Party party) {
+        //Check if the bowlers have any previous game scores
+        boolean newBowlers = finalScores.isEmpty();
+
         //Object type cast preserves original Vector implementation of Party
         for (Object bowler : party.getMembers()) {
             currentScores.put((Bowler) bowler, new GameScore());
 
-            if (finalScores.isEmpty()) {
+            if (newBowlers) {
                 finalScores.put((Bowler) bowler, new FinalScore());
             }
         }

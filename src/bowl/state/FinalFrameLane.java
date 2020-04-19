@@ -58,17 +58,17 @@ public class FinalFrameLane implements ILaneStatus {
     @Override
     public void handlePinsetterEvent(PinsetterEvent event) {
         int throwNumber = event.getThrowNumber();
-        int totalPins = event.totalPinsDown();
+        int pinsDown = event.pinsDownOnThisThrow();
 
         lane.markScore(currentBowler, 9,
                 event.pinsDownOnThisThrow(), ballNumber, bowlIndex);
-        if (totalPins == 10){
+        if (tenthFrameStrike || pinsDown == 10){
             lane.resetPins();
-            if (throwNumber == 1){
+            if (throwNumber < 3){
                 tenthFrameStrike = true;
             }
         }
-        if (totalPins != 10 && (throwNumber == 2 && !tenthFrameStrike)){
+        if (pinsDown != 10 && (throwNumber == 2 && !tenthFrameStrike)){
             canThrowAgain = false;
         }
         if (throwNumber == 3){

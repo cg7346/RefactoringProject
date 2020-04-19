@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class FinalScore {
     //The previous scores that the bowler has gotten in each game
-    private ArrayList<Integer> gameScores;
+    private ArrayList<GameScore> gameScores;
 
     public FinalScore() {
         gameScores = new ArrayList<>();
@@ -19,7 +19,7 @@ public class FinalScore {
      * @param gameScore The GameScore that the bowler just finished with.
      */
     public void addNewGameScore(GameScore gameScore) {
-        gameScores.add(gameScore.getScore());
+        gameScores.add(gameScore);
     }
 
     /**
@@ -29,8 +29,10 @@ public class FinalScore {
     public int[] getScores() {
         int[] result = new int[gameScores.size()];
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = gameScores.get(i);
+        int i = 0;
+        for (GameScore gameScore : gameScores) {
+            result[i] = gameScore.getScore();
+            i++;
         }
 
         return result;
